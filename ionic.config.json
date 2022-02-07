@@ -1,0 +1,7 @@
+{
+  "name": "RoosterGame",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
