@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,9 @@ export class HomePage {
   gameLogo = '/assets/roosterImg.jpeg';
   startButtonLabel = 'start';
 
-  constructor() {}
+  constructor(private readonly navCtrl: NavController) {}
 
+  startGame(): void {
+    this.navCtrl.navigateForward('/roostergame');
+  }
 }

@@ -9,11 +9,12 @@
 
 </ion-content>
 
-<ion-footer >
+<ion-footer class="ion-no-border">
   <ion-button
   class="ion-margin"
   expand="block"
   color="danger"
   shape="round"
-  size="large"> {{ startButtonLabel | titlecase }}</ion-button>
+  size="large"
+  (click)="startGame()"> {{ startButtonLabel | titlecase }}</ion-button>
 </ion-footer>
