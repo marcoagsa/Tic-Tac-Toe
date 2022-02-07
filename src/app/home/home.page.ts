@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+  pageTitle = 'Rooster Game';
+  gameLogo = '/assets/roosterImg.jpeg';
+  startButtonLabel = 'start';
+
   constructor() {}
 
 }
