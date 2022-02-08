@@ -36,34 +36,3 @@
   (click)="newGame()"> {{ newGameButtonLabel | titlecase }} {{ isDraw() }}</ion-button>
 
 </ion-content>
-
-<ion-popover class="transparent-modal"
-[isOpen]="showPopover"
-alignment="center"
-backdropDismiss="false"
-dismissOnSelect="true"
-keyboardClose="true"
-size="auto"
->
-  <ng-template>
-    <ion-content scrollY="false">
-    <ion-header>
-      <ion-toolbar class="ion-no-padding">
-        <ion-title>Select your Icon !</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-row class="ion-margin-top ion-margin-bottom">
-      <ion-col size="6" class="border-right">
-        <ion-button size="large" expand="block" fill="outline" color="primary" (click)="selectUserIcon('X')">
-          <ion-icon slot="icon-only" name="close-outline"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col size="6" class="">
-        <ion-button size="large" expand="block" fill="outline" color="danger" (click)="selectUserIcon('O')">
-          <ion-icon slot="icon-only" name="ellipse-outline"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-content>
-  </ng-template>
-</ion-popover>

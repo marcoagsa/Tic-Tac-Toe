@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonButton } from '@ionic/angular';
+import { HelpService } from '../services/help.service';
 
 @Component({
   selector: 'app-roostergame',
@@ -9,10 +9,9 @@ import { IonButton } from '@ionic/angular';
 export class RoostergamePage implements OnInit {
 
   newGameButtonLabel = 'New Game ???';
-  showPopover = true;
   userIcon = null;
   cpuIcon = null;
-  value = null;
+  // value = null;
 
   userWins = 0;
   cpuWins = 0;
@@ -22,14 +21,24 @@ export class RoostergamePage implements OnInit {
   lastWinner: number;
   userIsNext: boolean;
 
-  constructor() { }
+  constructor(private readonly helperService: HelpService) { }
 
   get player() {
     return this.userIsNext ? this.userIcon : this.cpuIcon;
   }
 
   ngOnInit() {
+    this.iconPick();
     this.newGame();
+  }
+
+  iconPick(): void {
+    this.helperService.openPopover().then((data) => {
+      if(data.data) {
+        this.userIcon = data.data.userIcon;
+        this.cpuIcon = data.data.cpuIcon;
+      }
+     });;
   }
 
   newGame(): void {
@@ -75,8 +84,10 @@ export class RoostergamePage implements OnInit {
     const win = this.winner;
     if (win === this.userIcon) {
       this.userWins = this.userWins + 1;
+      this.helperService.presentToast('Rate Message');
     } else {
       this.cpuWins = this.cpuWins + 1;
+      this.helperService.presentToast('Rate Message');
     }
   }
 
@@ -101,13 +112,6 @@ export class RoostergamePage implements OnInit {
       }
     }
     return null;
-  }
-
-  selectUserIcon(event: any): void {
-    this.userIcon = event;
-    this.cpuIcon = event === 'X' ? 'O' : 'X';
-    this.showPopover = false;
-    this.winner = null;
   }
 
   getRandomIntInclusive(min, max) {

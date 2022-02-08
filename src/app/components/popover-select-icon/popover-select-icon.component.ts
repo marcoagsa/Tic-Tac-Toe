@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-popover-select-icon',
@@ -7,8 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PopoverSelectIconComponent implements OnInit {
 
-  constructor() { }
+  @Input() popoverTitle;
+
+  userIcon = null;
+  cpuIcon = null;
+
+  constructor(private readonly popoverController: PopoverController,) { }
 
   ngOnInit() {}
 
+  selectUserIcon(event: any): void {
+    this.userIcon = event;
+    this.cpuIcon = event === 'X' ? 'O' : 'X';
+    this.popoverController.dismiss({userIcon: this.userIcon, cpuIcon: this.cpuIcon});
+  }
 }
