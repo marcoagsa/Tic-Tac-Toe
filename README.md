@@ -7,6 +7,8 @@ This is a rooster game, build with:
 
 this game can run in browser / android / ios
 
+ ![, Game Image](/assets/git/git-1.png)
+
 # Development Setup 💻
 
 ### Prerequisites
