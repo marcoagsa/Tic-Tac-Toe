@@ -24,3 +24,23 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+.transparent-modal {
+  &::part(backdrop) {
+    background-color: #0000005c;
+  }
+  &::part(content) {
+    backdrop-filter:blur(12px);
+    width: 80%;
+    height: auto;
+    margin: auto;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+}
+
+
+ion-popover {
+  background-color: #0000009c
+}
