@@ -32,7 +32,7 @@
   color="danger"
   shape="round"
   size="large"
-  [disabled]="showPopover || winner === null && !isDraw()"
-  (click)="newGame()"> {{ newGameButtonLabel | titlecase }} {{ isDraw() }}</ion-button>
+  [disabled]="winner === null && !isDraw()"
+  (click)="newGame()"> {{ newGameButtonLabel | titlecase }} </ion-button>
 
 </ion-content>
