@@ -18,6 +18,7 @@ cd RoosterGame
 
 **Prepare and launch the Android app:**
 >npx ionic cap sync android
+>
 >npx ionic cap run android
 
 **Prepare and launch the iOS app:**
