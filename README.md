@@ -43,4 +43,6 @@ this game can run in browser / android / ios
 > 
 > npx ionic cap run ios
 
+**Android APK - DEMO:**
+>> https://jof7uh.s.cld.pt
 This project uses Ionic as app development platform and the Ionic CLI.
