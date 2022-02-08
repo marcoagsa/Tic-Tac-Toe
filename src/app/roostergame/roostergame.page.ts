@@ -54,6 +54,7 @@ export class RoostergamePage implements OnInit {
     }
     this.winner = this.checkWinner();
     if (this.player === this.cpuIcon && this.winner === null) {
+      this.helperService.shwoLoading();
       this.cpuMove();
     }
   }
@@ -69,8 +70,9 @@ export class RoostergamePage implements OnInit {
   cpuMove(): void {
     const timeout = 500;
     setTimeout(() => {
-      const idx = this.getRandomIntInclusive(0, 8);
+      const idx = this.helperService.getRandomIntInclusive(0, 8);
       if (!this.boardGamePositions[idx] && this.winner === null) {
+        this.helperService.hideLoading();
         this.boardGamePositions.splice(idx, 1, this.player);
         this.userIsNext = !this.userIsNext;
       } else {
@@ -112,12 +114,6 @@ export class RoostergamePage implements OnInit {
       }
     }
     return null;
-  }
-
-  getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
 }

@@ -27,15 +27,13 @@ export class HelpService {
   async shwoLoading() {
     const loading = await this.loadingCtrl.create({
       cssClass: 'loading',
-      message: 'Loading...',
+      message: 'I´m thinking...',
     });
     await loading.present();
   }
 
-  hideLoading(hide = false): void {
-    if (hide) {
-      this.loadingCtrl.dismiss();
-    }
+  hideLoading(): void {
+    this.loadingCtrl.dismiss();
   }
 
   async presentToast(message: string) {
@@ -48,5 +46,11 @@ export class HelpService {
       duration: 5000
     });
     toast.present();
+  }
+
+  getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }
