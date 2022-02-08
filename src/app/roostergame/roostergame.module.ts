@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { RoostergamePageRoutingModule } from './roostergame-routing.module';
 
 import { RoostergamePage } from './roostergame.page';
+import { RoosterIconComponent } from '../components/rooster-icon/rooster-icon.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { RoostergamePage } from './roostergame.page';
     IonicModule,
     RoostergamePageRoutingModule
   ],
-  declarations: [RoostergamePage]
+  declarations: [RoostergamePage, RoosterIconComponent]
 })
 export class RoostergamePageModule {}
