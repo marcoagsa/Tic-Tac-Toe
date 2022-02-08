@@ -1,17 +1,30 @@
 # RoosterGame
+This is a rooster game, build with:
+ - ionic framework V6
+ - angular V13
+ - capacitor android and ios V3.4.0
+ - typescript V4.4.4
 
-## Development Setup 💻
+this game can run in browser / android / ios
+
+# Development Setup 💻
+
 ### Prerequisites
-  .Install Node.js which includes Node Package Manager
-  .Android development: Install Android Studio
-  .iOS development: Install XCode
+  - Install Node.js which includes Node Package Manager
+  - Android development: Install Android Studio
+  - iOS development: Install XCode
 
-#### Getting Started
+## Getting Started
+
 **Clone this repository:**
+>
 > git clone https://github.com/marcoagsa/RoosterGame.git
+> 
 
 **Change to the root directory of the project:**
-cd RoosterGame
+>
+> cd RoosterGame
+> 
 
 **Install all dependencies:**
 > npm i
@@ -23,5 +36,7 @@ cd RoosterGame
 
 **Prepare and launch the iOS app:**
 > npx ionic cap sync ios
+> 
 > npx ionic cap run ios
+
 This project uses Ionic as app development platform and the Ionic CLI.
