@@ -1,25 +1,25 @@
 <ion-content [fullscreen]="true" scrollY="false">
 
-  <ion-card >
-    <ion-item lines="none">
-      <ion-icon name="person-outline" slot="start" color="primary">
+  <ion-card mode="ios">
+    <ion-item lines="none" mode="ios">
+      <ion-icon mode="ios" name="person-outline" slot="start" color="primary">
       </ion-icon>
-      <ion-label> Next Player <ion-text [color]="player === 'X' ? 'primary' : 'danger' ">
+      <ion-label> {{ nextPlayerLabel | titlecase}} <ion-text [color]="player === 'X' ? 'primary' : 'danger' ">
         <b *ngIf="userIcon !== null && winner === null"> {{ userIsNext ? you : cpu }} </b>  </ion-text> </ion-label>
-      <ion-icon name="laptop-outline" slot="end" color="danger">
+      <ion-icon mode="ios" name="laptop-outline" slot="end" color="danger">
       </ion-icon>
     </ion-item>
 
-    <ion-item lines="none">
-      <ion-label slot="start" class="label--user"> {{ userWins }} </ion-label>
-      <ion-label slot="end" class="label--cpu"> {{ cpuWins }} </ion-label>
+    <ion-item lines="none" mode="ios">
+      <ion-label mode="ios" slot="start" class="label--user"> {{ userWins }} </ion-label>
+      <ion-label mode="ios" slot="end" class="label--cpu"> {{ cpuWins }} </ion-label>
     </ion-item>
   </ion-card>
 
-  <ion-card [disabled]="winner !== null">
-    <ion-grid >
-      <ion-row>
-        <ion-col size="4" class="border" *ngFor="let val of boardGamePositions; let i=index" >
+  <ion-card [disabled]="winner !== null || isDraw()" mode="ios">
+    <ion-grid mode="ios">
+      <ion-row mode="ios">
+        <ion-col mode="ios" size="4" class="border" *ngFor="let val of boardGamePositions; let i=index" >
           <app-rooster-icon [value]="val" (click)="makeMove(i)"></app-rooster-icon>
         </ion-col>
       </ion-row>
@@ -32,6 +32,7 @@
   color="danger"
   shape="round"
   size="large"
+  mode="ios"
   [disabled]="winner === null && !isDraw()"
   (click)="newGame()"> {{ newGameButtonLabel | titlecase }} </ion-button>
 

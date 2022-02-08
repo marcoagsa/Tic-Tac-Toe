@@ -1,20 +1,21 @@
 <ion-content [fullscreen]="true" scrollY="false">
 
-<ion-label class="title" color="danger">{{ pageTitle }}</ion-label>
+<ion-label mode="ios" class="title" color="danger">{{ pageTitle }}</ion-label>
 
-<ion-card>
+<ion-card mode="ios">
   <img class="img-rooster" [src]="gameLogo" />
 </ion-card>
 
 
 </ion-content>
 
-<ion-footer class="ion-no-border">
+<ion-footer mode="ios" class="ion-no-border">
   <ion-button
   class="ion-margin"
   expand="block"
   color="danger"
   shape="round"
   size="large"
+  mode="ios"
   (click)="startGame()"> {{ startButtonLabel | titlecase }}</ion-button>
 </ion-footer>
