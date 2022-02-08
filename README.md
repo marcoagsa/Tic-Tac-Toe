@@ -6,7 +6,8 @@ This is a rooster game, build with:
  - typescript V4.4.4
 
 this game can run in browser / android / ios
-
+ 
+ ![, Game Image](src/assets/git/git-3.png)
  ![, Game Image](src/assets/git/git-1.png)
  ![, Game Image](src/assets/git/git-2.png)
 
