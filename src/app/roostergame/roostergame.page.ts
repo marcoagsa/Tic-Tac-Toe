@@ -11,8 +11,8 @@ export class RoostergamePage implements OnInit {
   newGameButtonLabel = 'New Game ???';
   userIcon = null;
   cpuIcon = null;
-  // value = null;
-
+  you: string;
+  cpu: string;
   userWins = 0;
   cpuWins = 0;
 
@@ -34,11 +34,13 @@ export class RoostergamePage implements OnInit {
 
   iconPick(): void {
     this.helperService.openPopover().then((data) => {
-      if(data.data) {
+      if (data.data) {
         this.userIcon = data.data.userIcon;
         this.cpuIcon = data.data.cpuIcon;
+        this.you = `User -> ${this.userIcon}`;
+        this.cpu = `CPU -> ${this.cpuIcon}`;
       }
-     });;
+    });;
   }
 
   newGame(): void {
@@ -53,7 +55,10 @@ export class RoostergamePage implements OnInit {
       this.userIsNext = !this.userIsNext;
     }
     this.winner = this.checkWinner();
-    if (this.player === this.cpuIcon && this.winner === null) {
+    if (this.winner !== null) {
+      this.countWins(this.winner);
+    }
+    if (!this.userIsNext && this.winner === null && !this.isDraw()) {
       this.helperService.shwoLoading();
       this.cpuMove();
     }
@@ -79,17 +84,19 @@ export class RoostergamePage implements OnInit {
         this.cpuMove();
       }
       this.winner = this.checkWinner();
+      if (this.winner !== null) {
+        this.countWins(this.winner);
+      }
     }, timeout);
   }
 
-  countWins(): void {
-    const win = this.winner;
-    if (win === this.userIcon) {
+  countWins(winner): void {
+    if (winner === this.userIcon) {
       this.userWins = this.userWins + 1;
-      this.helperService.presentToast('Rate Message');
+      this.helperService.presentToast('You win !');
     } else {
       this.cpuWins = this.cpuWins + 1;
-      this.helperService.presentToast('Rate Message');
+      this.helperService.presentToast('You lose !');
     }
   }
 
@@ -115,5 +122,4 @@ export class RoostergamePage implements OnInit {
     }
     return null;
   }
-
 }
