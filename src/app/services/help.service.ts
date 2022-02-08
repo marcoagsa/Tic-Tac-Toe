@@ -27,6 +27,7 @@ export class HelpService {
   async shwoLoading() {
     const loading = await this.loadingCtrl.create({
       cssClass: 'loading',
+      mode: 'ios',
       message: 'I´m thinking...',
     });
     await loading.present();
@@ -42,7 +43,7 @@ export class HelpService {
       message,
       color: 'primary',
       mode: 'ios',
-      position: 'top',
+      position: 'middle',
       duration: 5000
     });
     toast.present();
