@@ -4,18 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RoostergamePageRoutingModule } from './roostergame-routing.module';
-
 import { RoostergamePage } from './roostergame.page';
-import { RoosterIconComponent } from '../components/rooster-icon/rooster-icon.component';
+import { SharedModule } from '../components/shared-module';
+import { RoostergamePageRoutingModule } from './roostergame-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RoostergamePageRoutingModule
+    RoostergamePageRoutingModule,
+    SharedModule
   ],
-  declarations: [RoostergamePage, RoosterIconComponent]
+  declarations: [RoostergamePage]
 })
 export class RoostergamePageModule {}
