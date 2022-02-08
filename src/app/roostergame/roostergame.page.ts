@@ -9,6 +9,7 @@ import { HelpService } from '../services/help.service';
 export class RoostergamePage implements OnInit {
 
   newGameButtonLabel = 'New Game ???';
+  nextPlayerLabel = 'Next Player';
   userIcon = null;
   cpuIcon = null;
   you: string;
@@ -93,10 +94,10 @@ export class RoostergamePage implements OnInit {
   countWins(winner): void {
     if (winner === this.userIcon) {
       this.userWins = this.userWins + 1;
-      this.helperService.presentToast('You win !');
+      this.helperService.presentToast('congratulations you win!');
     } else {
       this.cpuWins = this.cpuWins + 1;
-      this.helperService.presentToast('You lose !');
+      this.helperService.presentToast('try again, you lose!');
     }
   }
 
