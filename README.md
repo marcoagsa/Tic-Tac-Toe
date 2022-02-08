@@ -5,8 +5,10 @@ This is a rooster game, build with:
  - capacitor android and ios V3.4.0
  - typescript V4.4.4
 
-this game can run in browser / android / ios
- 
+This game can run in browser / android / ios
+
+This project uses Ionic as app development platform and the Ionic CLI.
+#
  ![, Game Image](src/assets/git/git-3.png)
  ![, Game Image](src/assets/git/git-1.png)
  ![, Game Image](src/assets/git/git-2.png)
@@ -44,5 +46,4 @@ this game can run in browser / android / ios
 > npx ionic cap run ios
 
 **Android APK - DEMO:**
->> https://jof7uh.s.cld.pt
-This project uses Ionic as app development platform and the Ionic CLI.
+> https://jof7uh.s.cld.pt
