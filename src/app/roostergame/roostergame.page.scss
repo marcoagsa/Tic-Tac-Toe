@@ -1,0 +1,23 @@
+ion-col {
+  display: flex;
+  justify-content: center;
+}
+
+.label--user {
+  padding-left: 5px;
+  font-size: 30px;
+}
+
+.label--cpu {
+  padding-right: 5px;
+  font-size: 30px;
+}
+
+ion-col.border {
+  border: solid 1px #9d9fa6;
+}
+
+ion-col.disabled {
+  background-color: #9d9fa6;
+  border: solid 1px #000;
+}

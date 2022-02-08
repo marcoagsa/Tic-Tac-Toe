@@ -1,9 +1,69 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>roostergame</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" scrollY="false">
 
-<ion-content>
+  <ion-card>
+    <ion-item lines="none">
+      <ion-icon name="person-outline" slot="start" color="primary">
+      </ion-icon>
+      <ion-label> Next Player <ion-text [color]="player === 'X' ? 'primary' : 'danger' "> <b> {{ player }} </b>  </ion-text> </ion-label>
+      <ion-icon name="laptop-outline" slot="end" color="danger">
+      </ion-icon>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label slot="start" class="label--user"> {{ userWins }} </ion-label>
+      <ion-label> Winner <ion-text color="primary"> <b> {{ winner }} </b>  </ion-text> </ion-label>
+      <ion-label slot="end" class="label--cpu"> {{ cpuWins }} </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-grid >
+      <ion-row>
+        <ion-col size="4" class="border" *ngFor="let val of boardGamePositions; let i=index" [ngClass]="{'disabled': winner !== null}">
+          <app-rooster-icon [value]="val" (click)="makeMove(i)"></app-rooster-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <ion-button
+  class="ion-margin"
+  expand="block"
+  color="danger"
+  shape="round"
+  size="large"
+  [disabled]="showPopover || winner === null && !isDraw()"
+  (click)="newGame()"> {{ newGameButtonLabel | titlecase }} {{ isDraw() }}</ion-button>
 
 </ion-content>
+
+<ion-popover class="transparent-modal"
+[isOpen]="showPopover"
+alignment="center"
+backdropDismiss="false"
+dismissOnSelect="true"
+keyboardClose="true"
+size="auto"
+>
+  <ng-template>
+    <ion-content scrollY="false">
+    <ion-header>
+      <ion-toolbar class="ion-no-padding">
+        <ion-title>Select your Icon !</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-row class="ion-margin-top ion-margin-bottom">
+      <ion-col size="6" class="border-right">
+        <ion-button size="large" expand="block" fill="outline" color="primary" (click)="selectUserIcon('X')">
+          <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="6" class="">
+        <ion-button size="large" expand="block" fill="outline" color="danger" (click)="selectUserIcon('O')">
+          <ion-icon slot="icon-only" name="ellipse-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-content>
+  </ng-template>
+</ion-popover>
