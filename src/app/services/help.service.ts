@@ -43,6 +43,7 @@ export class HelpService {
       message,
       color: 'primary',
       mode: 'ios',
+      cssClass: 'toast',
       position: 'middle',
       duration: 5000
     });
