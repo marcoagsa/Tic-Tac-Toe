@@ -1,6 +1,6 @@
-<ion-content [fullscreen]="true" scrollY="false">
+<ion-content [fullscreen]="true" scrollY="false" >
 
-  <ion-card mode="ios">
+  <ion-card mode="ios" [ngClass]="{'margin-top': platform.is('ios')}">
     <ion-item lines="none" mode="ios">
       <ion-icon mode="ios" name="person-outline" slot="start" color="primary">
       </ion-icon>
@@ -27,7 +27,7 @@
   </ion-card>
 
   <ion-button
-  class="ion-margin"
+  class="ion-margin margin-top"
   expand="block"
   color="danger"
   shape="round"

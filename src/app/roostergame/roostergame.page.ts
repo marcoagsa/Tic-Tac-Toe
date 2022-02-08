@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Platform } from '@ionic/angular';
 import { HelpService } from '../services/help.service';
 
 @Component({
@@ -22,7 +23,10 @@ export class RoostergamePage implements OnInit {
   lastWinner: number;
   userIsNext: boolean;
 
-  constructor(private readonly helperService: HelpService) { }
+  constructor(
+    private readonly helperService: HelpService,
+    public readonly platform: Platform,
+  ) { }
 
   get player() {
     return this.userIsNext ? this.userIcon : this.cpuIcon;
