@@ -2,11 +2,17 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { TictactoeIconComponent } from '.';
+import { ScoreHeaderComponent, TictactoeIconComponent } from '.';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, TictactoeIconComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    TictactoeIconComponent,
+    ScoreHeaderComponent,
+  ],
   declarations: [],
-  exports: [TictactoeIconComponent],
+  exports: [TictactoeIconComponent, ScoreHeaderComponent],
 })
 export class SharedModule {}
