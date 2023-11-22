@@ -1,21 +1,14 @@
 <ion-content [fullscreen]="true" scrollY="false" [ngClass]="{'ios': platform.is('ios')}">
 
-<ion-label mode="ios" class="title" color="danger">{{ pageTitle }}</ion-label>
+  <ion-label mode="ios" class="title" color="tic-tac-toe">{{ pageTitle }}</ion-label>
 
-<ion-card mode="ios">
-  <img class="img-rooster" [src]="gameLogo" />
-</ion-card>
-
+  <ion-card mode="ios">
+    <ion-img class="logo" [src]="gameLogo" />
+  </ion-card>
 
 </ion-content>
 
 <ion-footer mode="ios" class="ion-no-border">
-  <ion-button
-  class="ion-margin"
-  expand="block"
-  color="danger"
-  shape="round"
-  size="large"
-  mode="ios"
-  (click)="startGame()"> {{ startButtonLabel | titlecase }}</ion-button>
+  <ion-button class="ion-margin" expand="block" color="tic-tac-toe" shape="round" size="large" mode="ios"
+    (click)="startGame()"> {{ startButtonLabel | titlecase }}</ion-button>
 </ion-footer>

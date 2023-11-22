@@ -1,11 +1,11 @@
-<ion-content [fullscreen]="true" scrollY="false" >
+<ion-content [fullscreen]="true" scrollY="false">
 
   <ion-card mode="ios" [ngClass]="{'margin-top': platform.is('ios')}">
     <ion-item lines="none" mode="ios">
-      <ion-icon mode="ios" name="person-outline" slot="start" color="primary">
+      <ion-icon mode="ios" name="person-outline" slot="start" color="tic-tac-toe">
       </ion-icon>
-      <ion-label> {{ nextPlayerLabel | titlecase}} <ion-text [color]="player === 'X' ? 'primary' : 'danger' ">
-        <b *ngIf="userIcon !== null && winner === null"> {{ userIsNext ? you : cpu }} </b>  </ion-text> </ion-label>
+      <ion-label> {{ nextPlayerLabel | titlecase }} <ion-text [color]="player === 'X' ? 'tic-tac-toe' : 'danger' ">
+          <b *ngIf="userIcon !== null && winner === null"> {{ userIsNext ? you : cpu }} </b> </ion-text> </ion-label>
       <ion-icon mode="ios" name="laptop-outline" slot="end" color="danger">
       </ion-icon>
     </ion-item>
@@ -19,21 +19,14 @@
   <ion-card [disabled]="winner !== null || isDraw()" mode="ios">
     <ion-grid mode="ios">
       <ion-row mode="ios">
-        <ion-col mode="ios" size="4" class="border" *ngFor="let val of boardGamePositions; let i=index" >
+        <ion-col mode="ios" size="4" class="border" *ngFor="let val of boardGamePositions; let i=index">
           <app-rooster-icon [value]="val" (click)="makeMove(i)"></app-rooster-icon>
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-card>
 
-  <ion-button
-  class="ion-margin margin-top"
-  expand="block"
-  color="danger"
-  shape="round"
-  size="large"
-  mode="ios"
-  [disabled]="winner === null && !isDraw()"
-  (click)="newGame()"> {{ newGameButtonLabel | titlecase }} </ion-button>
+  <ion-button class="ion-margin margin-top" expand="block" color="tic-tac-toe" shape="round" size="large" mode="ios"
+    [disabled]="winner === null && !isDraw()" (click)="newGame()"> {{ newGameButtonLabel | titlecase }} </ion-button>
 
 </ion-content>

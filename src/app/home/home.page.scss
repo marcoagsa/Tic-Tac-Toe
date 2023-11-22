@@ -5,8 +5,11 @@
   text-align: -webkit-center;
   justify-content: center;
 }
-
-img {
+ion-card {
+  background: var(--ion-background-color);
+}
+ion-img {
+  // background: var(--ion-background-color);
   display: flex;
   margin: 0 auto;
 }

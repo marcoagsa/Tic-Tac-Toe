@@ -7,14 +7,13 @@ import { NavController, Platform } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
-  pageTitle = 'Rooster Game';
-  gameLogo = '/assets/roosterImg.jpeg';
+  pageTitle = 'Tic-tac-toe';
+  gameLogo = '/assets/tictactoe.png';
   startButtonLabel = 'start';
 
   constructor(
     private readonly navCtrl: NavController,
-    public readonly platform: Platform,
+    public readonly platform: Platform
   ) {}
 
   startGame(): void {
