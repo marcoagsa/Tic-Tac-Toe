@@ -29,9 +29,5 @@ import { IonicModule } from '@ionic/angular';
   `,
 })
 export class TictactoeIconComponent {
-  @Input() value;
-
-  get Color(): string {
-    return this.value === '1' ? 'primary' : 'danger';
-  }
+  @Input({ required: true }) value;
 }
