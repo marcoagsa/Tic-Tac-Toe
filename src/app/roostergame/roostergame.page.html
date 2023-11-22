@@ -1,21 +1,7 @@
 <ion-content [fullscreen]="true" scrollY="false">
 
-  <ion-card mode="ios" [ngClass]="{'margin-top': platform.is('ios')}">
-    <ion-item lines="none" mode="ios">
-      <ion-icon mode="ios" name="person-outline" slot="start" color="tic-tac-toe">
-      </ion-icon>
-      <ion-label> {{ nextPlayerLabel | titlecase }} <ion-text [color]="player === 1 ? 'tic-tac-toe' : 'danger' ">
-          <b *ngIf="userIcon !== null && winner === null"> {{ userIsNext ? checkIcon(userIcon) : checkIcon(cpuIcon) }}
-          </b> </ion-text> </ion-label>
-      <ion-icon mode="ios" name="laptop-outline" slot="end" color="danger">
-      </ion-icon>
-    </ion-item>
-
-    <ion-item lines="none" mode="ios">
-      <ion-label mode="ios" slot="start" class="label--user"> {{ userWins }} </ion-label>
-      <ion-label mode="ios" slot="end" class="label--cpu"> {{ cpuWins }} </ion-label>
-    </ion-item>
-  </ion-card>
+  <app-score-header [userIsNext]="userIsNext" [userIcon]="userIcon" [cpuIcon]="cpuIcon" [userWins]="userWins"
+    [cpuWins]="cpuWins" [winner]="winner" [player]="player" />
 
 
   <ion-card [disabled]="winner !== null || isDraw()" mode="ios">

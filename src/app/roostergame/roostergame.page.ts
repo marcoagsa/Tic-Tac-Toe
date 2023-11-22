@@ -9,7 +9,7 @@ import { HelpService } from '../services/help.service';
 })
 export class RoostergamePage implements OnInit {
   newGameButtonLabel: string = 'New Game ???';
-  nextPlayerLabel: string = 'Next Player';
+
   userIcon: number = null;
   cpuIcon: number = null;
   userWins = 0;
@@ -44,13 +44,6 @@ export class RoostergamePage implements OnInit {
     this.cpuIcon = data === 2 ? 1 : 2;
   }
 
-  checkIcon(num: number) {
-    return {
-      0: 'O',
-      1: 'X',
-    }[num];
-  }
-
   newGame(): void {
     this.boardGamePositions = Array(9).fill(null);
     this.winner = null;
@@ -58,7 +51,6 @@ export class RoostergamePage implements OnInit {
   }
 
   makeMove(index: number): void {
-    console.log(`MSA 🔊 index:`, index);
     if (!this.boardGamePositions[index] && this.winner === null) {
       this.boardGamePositions.splice(index, 1, this.player);
       this.userIsNext = !this.userIsNext;
@@ -85,7 +77,7 @@ export class RoostergamePage implements OnInit {
   }
 
   cpuMove(): void {
-    const timeout = 500;
+    const timeout = 1000;
     setTimeout(() => {
       const idx = this.helperService.getRandomIntInclusive(0, 8);
       if (!this.boardGamePositions[idx] && this.winner === null) {
