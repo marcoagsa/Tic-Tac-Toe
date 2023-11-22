@@ -14,8 +14,8 @@ import { RoostergamePageRoutingModule } from './roostergame-routing.module';
     FormsModule,
     IonicModule,
     RoostergamePageRoutingModule,
-    SharedModule
+    SharedModule,
   ],
-  declarations: [RoostergamePage]
+  declarations: [RoostergamePage],
 })
 export class RoostergamePageModule {}

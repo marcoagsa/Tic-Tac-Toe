@@ -8,12 +8,10 @@ import { HelpService } from '../services/help.service';
   styleUrls: ['./roostergame.page.scss'],
 })
 export class RoostergamePage implements OnInit {
-  newGameButtonLabel = 'New Game ???';
-  nextPlayerLabel = 'Next Player';
-  userIcon = null;
-  cpuIcon = null;
-  you: string;
-  cpu: string;
+  newGameButtonLabel: string = 'New Game ???';
+  nextPlayerLabel: string = 'Next Player';
+  userIcon: number = null;
+  cpuIcon: number = null;
   userWins = 0;
   cpuWins = 0;
 
@@ -36,15 +34,21 @@ export class RoostergamePage implements OnInit {
     this.newGame();
   }
 
-  iconPick(): void {
-    this.helperService.openPopover().then((data) => {
-      if (data.data) {
-        this.userIcon = data.data.userIcon;
-        this.cpuIcon = data.data.cpuIcon;
-        this.you = `User -> ${this.userIcon}`;
-        this.cpu = `CPU -> ${this.cpuIcon}`;
-      }
-    });
+  async iconPick(): Promise<any> {
+    const { data } = await this.helperService.openModal();
+
+    if (!data) {
+      return;
+    }
+    this.userIcon = data;
+    this.cpuIcon = data === 2 ? 1 : 2;
+  }
+
+  checkIcon(num: number) {
+    return {
+      0: 'O',
+      1: 'X',
+    }[num];
   }
 
   newGame(): void {
@@ -54,6 +58,7 @@ export class RoostergamePage implements OnInit {
   }
 
   makeMove(index: number): void {
+    console.log(`MSA 🔊 index:`, index);
     if (!this.boardGamePositions[index] && this.winner === null) {
       this.boardGamePositions.splice(index, 1, this.player);
       this.userIsNext = !this.userIsNext;
