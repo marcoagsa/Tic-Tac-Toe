@@ -1,32 +1,35 @@
 import { Injectable } from '@angular/core';
 import {
   LoadingController,
-  PopoverController,
+  ModalController,
   ToastController,
 } from '@ionic/angular';
-import { PopoverSelectIconComponent } from '../components/popover-select-icon/popover-select-icon.component';
+import { SelectTictactoeIconComponent } from '../modal';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HelpService {
   constructor(
-    private readonly popoverCtrl: PopoverController,
-    private toastController: ToastController,
-    private loadingCtrl: LoadingController
+    readonly modalController: ModalController,
+    readonly toastController: ToastController,
+    readonly loadingCtrl: LoadingController
   ) {}
 
-  async openPopover() {
-    const popover = await this.popoverCtrl.create({
-      component: PopoverSelectIconComponent,
-      cssClass: 'transparent-modal',
-      componentProps: {},
+  async openModal() {
+    const modal = await this.modalController.create({
+      component: SelectTictactoeIconComponent,
       backdropDismiss: false,
-      translucent: false,
+      showBackdrop: true,
+      keyboardClose: true,
+      breakpoints: [0, 0.25],
+      initialBreakpoint: 0.25,
+      handleBehavior: 'cycle',
     });
-    await popover.present();
-    return popover.onDidDismiss();
+    await modal.present();
+    return modal.onDidDismiss();
   }
+
   async showLoading() {
     const loading = await this.loadingCtrl.create({
       cssClass: 'loading',
