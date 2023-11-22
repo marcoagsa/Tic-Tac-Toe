@@ -3707,9 +3707,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"RoosterGame@workspace:.":
+"Tic-Tac-Toe@workspace:.":
   version: 0.0.0-use.local
-  resolution: "RoosterGame@workspace:."
+  resolution: "Tic-Tac-Toe@workspace:."
   dependencies:
     "@angular-devkit/build-angular": "npm:17.0.3"
     "@angular-eslint/builder": "npm:17.1.0"
