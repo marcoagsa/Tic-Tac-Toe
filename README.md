@@ -2,10 +2,10 @@
 
 This is a rooster game, build with:
 
-- ionic framework V6
-- angular V13
-- capacitor android and ios V3.4.0
-- typescript V4.4.4
+- Ionic framework V7
+- Angular V17
+- Capacitor android and ios V5
+- typescript V5
 
 This game can run in browser / android / ios
 
@@ -29,7 +29,7 @@ This project uses Ionic as app development platform and the Ionic CLI.
 
 **Clone this repository:**
 
-> git clone https://github.com/marcoagsa/RoosterGame.git
+> git clone https://github.com/marcoagsa/Tic-Tac-Toe.git
 
 **Change to the root directory of the project:**
 
