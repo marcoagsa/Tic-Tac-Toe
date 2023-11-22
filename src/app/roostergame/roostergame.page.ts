@@ -8,7 +8,6 @@ import { HelpService } from '../services/help.service';
   styleUrls: ['./roostergame.page.scss'],
 })
 export class RoostergamePage implements OnInit {
-
   newGameButtonLabel = 'New Game ???';
   nextPlayerLabel = 'Next Player';
   userIcon = null;
@@ -25,8 +24,8 @@ export class RoostergamePage implements OnInit {
 
   constructor(
     private readonly helperService: HelpService,
-    public readonly platform: Platform,
-  ) { }
+    public readonly platform: Platform
+  ) {}
 
   get player() {
     return this.userIsNext ? this.userIcon : this.cpuIcon;
@@ -45,7 +44,7 @@ export class RoostergamePage implements OnInit {
         this.you = `User -> ${this.userIcon}`;
         this.cpu = `CPU -> ${this.cpuIcon}`;
       }
-    });;
+    });
   }
 
   newGame(): void {
@@ -64,14 +63,17 @@ export class RoostergamePage implements OnInit {
       this.countWins(this.winner);
     }
     if (!this.userIsNext && this.winner === null && !this.isDraw()) {
-      this.helperService.shwoLoading();
+      this.helperService.showLoading();
       this.cpuMove();
     }
   }
 
   isDraw(): boolean {
     let tie = false;
-    if (this.boardGamePositions.filter((el) => el === null).length === 0 && this.winner === null) {
+    if (
+      this.boardGamePositions.filter((el) => el === null).length === 0 &&
+      this.winner === null
+    ) {
       tie = true;
     }
     return tie;
@@ -114,14 +116,15 @@ export class RoostergamePage implements OnInit {
       [1, 4, 7],
       [2, 5, 8],
       [0, 4, 8],
-      [2, 4, 6]
+      [2, 4, 6],
     ];
     for (const [index, value] of positionsOfWins.entries()) {
       const [a, b, c] = positionsOfWins[index];
       if (
         this.boardGamePositions[a] &&
         this.boardGamePositions[a] === this.boardGamePositions[b] &&
-        this.boardGamePositions[a] === this.boardGamePositions[c]) {
+        this.boardGamePositions[a] === this.boardGamePositions[c]
+      ) {
         return this.boardGamePositions[a];
       }
     }
