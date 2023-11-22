@@ -20,6 +20,17 @@ export class RoostergamePage implements OnInit {
   lastWinner: number;
   userIsNext: boolean;
 
+  positionsOfWins: number[][] = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
   constructor(
     private readonly helperService: HelpService,
     public readonly platform: Platform
@@ -79,13 +90,24 @@ export class RoostergamePage implements OnInit {
   cpuMove(): void {
     const timeout = 1000;
     setTimeout(() => {
-      const idx = this.helperService.getRandomIntInclusive(0, 8);
-      if (!this.boardGamePositions[idx] && this.winner === null) {
+      let posicaoParaVitoria = this.verificarVitoria(
+        this.boardGamePositions,
+        this.positionsOfWins
+      );
+
+      if (posicaoParaVitoria === null) {
+        posicaoParaVitoria = this.boardGamePositions.find(
+          (position) => position !== null
+        );
+      }
+
+      if (
+        !this.boardGamePositions[posicaoParaVitoria] &&
+        this.winner === null
+      ) {
         this.helperService.hideLoading();
-        this.boardGamePositions.splice(idx, 1, this.player);
+        this.boardGamePositions.splice(posicaoParaVitoria, 1, this.player);
         this.userIsNext = !this.userIsNext;
-      } else {
-        this.cpuMove();
       }
       this.winner = this.checkWinner();
       if (this.winner !== null) {
@@ -104,19 +126,45 @@ export class RoostergamePage implements OnInit {
     }
   }
 
+  verificarVitoria(
+    board: number[],
+    positionsOfWins: number[][]
+  ): number | null {
+    for (const position of positionsOfWins) {
+      const [posicao1, posicao2, posicao3] = position;
+
+      const simboloPosicao1 = board[posicao1];
+      const simboloPosicao2 = board[posicao2];
+      const simboloPosicao3 = board[posicao3];
+
+      if (
+        simboloPosicao1 !== null &&
+        simboloPosicao1 === simboloPosicao2 &&
+        simboloPosicao3 === null
+      ) {
+        return posicao3;
+      }
+      if (
+        simboloPosicao1 !== null &&
+        simboloPosicao1 === simboloPosicao3 &&
+        simboloPosicao2 === null
+      ) {
+        return posicao2;
+      }
+      if (
+        simboloPosicao2 !== null &&
+        simboloPosicao2 === simboloPosicao3 &&
+        simboloPosicao1 === null
+      ) {
+        return posicao1;
+      }
+    }
+    return null;
+  }
+
   checkWinner(): number {
-    const positionsOfWins = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-    for (const [index, value] of positionsOfWins.entries()) {
-      const [a, b, c] = positionsOfWins[index];
+    for (const [index, value] of this.positionsOfWins.entries()) {
+      const [a, b, c] = this.positionsOfWins[index];
       if (
         this.boardGamePositions[a] &&
         this.boardGamePositions[a] === this.boardGamePositions[b] &&
