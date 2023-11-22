@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
-import { LoadingController, PopoverController, ToastController } from '@ionic/angular';
+import {
+  LoadingController,
+  PopoverController,
+  ToastController,
+} from '@ionic/angular';
 import { PopoverSelectIconComponent } from '../components/popover-select-icon/popover-select-icon.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HelpService {
-
   constructor(
     private readonly popoverCtrl: PopoverController,
     private toastController: ToastController,
-    private loadingCtrl: LoadingController,
-  ) { }
+    private loadingCtrl: LoadingController
+  ) {}
 
   async openPopover() {
     const popover = await this.popoverCtrl.create({
@@ -24,7 +27,7 @@ export class HelpService {
     await popover.present();
     return popover.onDidDismiss();
   }
-  async shwoLoading() {
+  async showLoading() {
     const loading = await this.loadingCtrl.create({
       cssClass: 'loading',
       mode: 'ios',
@@ -45,7 +48,7 @@ export class HelpService {
       mode: 'ios',
       cssClass: 'toast',
       position: 'middle',
-      duration: 5000
+      duration: 5000,
     });
     toast.present();
   }
