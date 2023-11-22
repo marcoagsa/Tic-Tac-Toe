@@ -20,7 +20,7 @@
     <ion-grid mode="ios">
       <ion-row mode="ios">
         <ion-col mode="ios" size="4" class="border" *ngFor="let val of boardGamePositions; let i=index">
-          <app-rooster-icon [value]="val" (click)="makeMove(i)"></app-rooster-icon>
+          <app-tictactoe-icon [value]="val" (click)="makeMove(i)" />
         </ion-col>
       </ion-row>
     </ion-grid>
