@@ -5,14 +5,14 @@ import { IonicModule } from '@ionic/angular';
   selector: 'app-tictactoe-icon',
   standalone: true,
   imports: [IonicModule],
-  template: `@if (value === 'X') {
+  template: `@if (value === 1) {
     <ion-icon
       mode="ios"
       slot="icon-only"
       name="close-outline"
       color="tic-tac-toe"
     />
-    } @else if(value === 'O') {
+    } @else if(value === 2) {
     <ion-icon
       mode="ios"
       slot="icon-only"
@@ -29,5 +29,5 @@ import { IonicModule } from '@ionic/angular';
   `,
 })
 export class TictactoeIconComponent {
-  @Input({ required: true }) value;
+  @Input({ required: true }) value: number;
 }
