@@ -119,15 +119,15 @@ export class GameComponent implements OnInit {
   }
 
   logicalMove(): void {
-    const timeout = 1000;
+    const timeout = 500;
+
     setTimeout(() => {
-      const logicPosition = this.checkVictoryPosition();
-      console.log(`MSA 🔊 logicPosition:`, logicPosition);
+      const logicPosition = this.logicAvoidUserVictory();
 
       if (!this.boardGamePositions[logicPosition] && this.winner === null) {
-        this.helperService.hideLoading();
         this.boardGamePositions.splice(logicPosition, 1, this.player);
         this.userIsNext = !this.userIsNext;
+        this.helperService.hideLoading();
       } else {
         this.logicalMove();
       }
@@ -142,41 +142,36 @@ export class GameComponent implements OnInit {
     this.userWin ? (this.userWins += 1) : (this.cpuWins += 1);
   }
 
-  checkVictoryPosition(): number {
+  logicAvoidUserVictory(): number {
     for (const position of this.positionsOfWins) {
-      const [posicao1, posicao2, posicao3] = position;
+      const [pos1, pos2, pos3] = position;
 
-      const simboloPosicao1 = this.boardGamePositions[posicao1];
-      const simboloPosicao2 = this.boardGamePositions[posicao2];
-      const simboloPosicao3 = this.boardGamePositions[posicao3];
+      const p1 = this.boardGamePositions[pos1];
+      const p2 = this.boardGamePositions[pos2];
+      const p3 = this.boardGamePositions[pos3];
 
-      if (
-        simboloPosicao1 !== null &&
-        simboloPosicao1 === simboloPosicao2 &&
-        simboloPosicao3 === null
-      ) {
-        return posicao3;
+      if (p1 !== null && p1 === p2 && p3 === null) {
+        return pos3;
       }
-      if (
-        simboloPosicao1 !== null &&
-        simboloPosicao1 === simboloPosicao3 &&
-        simboloPosicao2 === null
-      ) {
-        return posicao2;
+      if (p1 !== null && p1 === p3 && p2 === null) {
+        return pos2;
       }
-      if (
-        simboloPosicao2 !== null &&
-        simboloPosicao2 === simboloPosicao3 &&
-        simboloPosicao1 === null
-      ) {
-        return posicao1;
+      if (p2 !== null && p2 === p3 && p1 === null) {
+        return pos1;
       }
     }
 
-    const positions = this.boardGamePositions.filter(
-      (position) => position === null
-    );
-    const index = Math.floor(Math.random() * positions.length);
+    return this.logicRadomMove();
+  }
+
+  logicRadomMove(): number {
+    let pos: number[] = [];
+    for (const [index, value] of this.boardGamePositions.entries()) {
+      if (value === null) {
+        pos.push(index);
+      }
+    }
+    const index = Math.floor(Math.random() * pos.length);
     return index;
   }
 
