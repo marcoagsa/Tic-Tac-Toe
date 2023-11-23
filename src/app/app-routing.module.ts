@@ -15,13 +15,6 @@ const routes: Routes = [
       import('./components/game/game.component').then((m) => m.GameComponent),
   },
   {
-    path: 'roostergame',
-    loadChildren: () =>
-      import('./roostergame/roostergame.module').then(
-        (m) => m.RoostergamePageModule
-      ),
-  },
-  {
     path: '',
     redirectTo: 'welcome',
     pathMatch: 'full',
