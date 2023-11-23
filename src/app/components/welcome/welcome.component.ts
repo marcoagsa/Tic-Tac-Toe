@@ -9,7 +9,7 @@ import { ButtonComponent } from '../button/button.component';
   standalone: true,
   imports: [IonicModule, NgClass, TitleCasePipe, ButtonComponent],
   template: `
-    <ion-content [fullscreen]="true" scrollY="false">
+    <ion-content [fullscreen]="true" scrollY="false" class="ion-padding">
       <ion-label mode="ios" class="title" color="tic-tac-toe">{{
         pageTitle
       }}</ion-label>
@@ -19,7 +19,7 @@ import { ButtonComponent } from '../button/button.component';
       </ion-card>
     </ion-content>
 
-    <ion-footer mode="ios" class="ion-no-border">
+    <ion-footer mode="ios" class="ion-no-border ion-padding">
       <app-button [label]="buttonLabel" (triggerClick)="init()" />
     </ion-footer>
   `,
