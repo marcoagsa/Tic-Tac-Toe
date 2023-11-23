@@ -14,6 +14,7 @@ import { IonicModule } from '@ionic/angular';
       shape="round"
       size="large"
       mode="ios"
+      [disabled]="disabled"
       (click)="triggerClick.emit()"
     >
       {{ label | titlecase }}
@@ -23,5 +24,6 @@ import { IonicModule } from '@ionic/angular';
 })
 export class ButtonComponent {
   @Input({ required: true }) label: string;
+  @Input() disabled: boolean | undefined;
   @Output() triggerClick = new EventEmitter();
 }
