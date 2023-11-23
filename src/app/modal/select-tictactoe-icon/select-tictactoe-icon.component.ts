@@ -61,7 +61,7 @@ import { IonicModule, ModalController } from '@ionic/angular';
     `,
 })
 export class SelectTictactoeIconComponent {
-  modalCrt = inject(ModalController);
+  readonly modalCrt = inject(ModalController);
   selectUserIcon(num: number): void {
     this.modalCrt.dismiss(num);
   }

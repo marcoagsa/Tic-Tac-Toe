@@ -10,10 +10,9 @@ import { ButtonComponent } from '../button/button.component';
   imports: [IonicModule, NgClass, TitleCasePipe, ButtonComponent],
   template: `
     <ion-content [fullscreen]="true" scrollY="false" class="ion-padding">
-      <ion-label mode="ios" class="title" color="tic-tac-toe">{{
-        pageTitle
-      }}</ion-label>
-
+      <ion-label mode="ios" class="title" color="tic-tac-toe">
+        {{ pageTitle }}
+      </ion-label>
       <ion-card mode="ios">
         <ion-img class="logo" [src]="gameLogo" />
       </ion-card>
@@ -45,9 +44,9 @@ export class WelcomeComponent {
   gameLogo: string = '/assets/tictactoe.png';
   buttonLabel = 'start';
 
-  routerCtrl = inject(Router);
+  readonly routerCtrl = inject(Router);
 
   init() {
-    this.routerCtrl.navigateByUrl('/roostergame');
+    this.routerCtrl.navigateByUrl('/game');
   }
 }
