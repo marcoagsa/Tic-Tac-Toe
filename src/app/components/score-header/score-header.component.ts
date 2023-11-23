@@ -1,5 +1,6 @@
+import { HelpService } from 'src/app/services/help.service';
 import { NgClass, TitleCasePipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -29,7 +30,11 @@ import { IonicModule } from '@ionic/angular';
                 {{ nextPlayerLabel | titlecase }}
               </ion-text>
               <ion-label [color]="iconColor(player)" class="blink">
-                {{ userIsNext ? checkIcon(userIcon) : checkIcon(cpuIcon) }}
+                {{
+                  userIsNext
+                    ? helpService.checkIcon(userIcon)
+                    : helpService.checkIcon(logicIcon)
+                }}
               </ion-label>
               }
             </ion-col>
@@ -37,8 +42,8 @@ import { IonicModule } from '@ionic/angular';
               <ion-icon
                 mode="ios"
                 name="laptop-outline"
-                [color]="iconColor(cpuIcon)"
-                [ngClass]="{ blink: !userIsNext }"
+                [color]="iconColor(logicIcon)"
+                [ngClass]="{ blink: !userIsNext && userIcon }"
               />
             </ion-col>
           </ion-row>
@@ -117,19 +122,14 @@ export class ScoreHeaderComponent {
   @Input({ required: true }) player: number;
   @Input({ required: true }) userIsNext: boolean;
   @Input({ required: true }) userIcon: number;
-  @Input({ required: true }) cpuIcon: number;
+  @Input({ required: true }) logicIcon: number;
   @Input({ required: true }) winner: number;
   @Input({ required: true }) userWins: number;
   @Input({ required: true }) cpuWins: number;
 
   nextPlayerLabel: string = 'Next Player';
 
-  checkIcon(num: number) {
-    return {
-      2: 'O',
-      1: 'X',
-    }[num];
-  }
+  readonly helpService = inject(HelpService);
 
   iconColor(num: number) {
     return {

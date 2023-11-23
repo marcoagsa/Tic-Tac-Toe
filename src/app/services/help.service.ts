@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   LoadingController,
   ModalController,
@@ -10,11 +10,9 @@ import { SelectTictactoeIconComponent } from '../modal';
   providedIn: 'root',
 })
 export class HelpService {
-  constructor(
-    readonly modalController: ModalController,
-    readonly toastController: ToastController,
-    readonly loadingCtrl: LoadingController
-  ) {}
+  readonly modalController = inject(ModalController);
+  readonly toastController = inject(ToastController);
+  readonly loadingCtrl = inject(LoadingController);
 
   async openModal() {
     const modal = await this.modalController.create({
@@ -43,22 +41,16 @@ export class HelpService {
     this.loadingCtrl.dismiss();
   }
 
-  async presentToast(message: string) {
-    const toast = await this.toastController.create({
-      header: 'The Winner is... ',
-      message,
-      color: 'primary',
-      mode: 'ios',
-      cssClass: 'toast',
-      position: 'middle',
-      duration: 5000,
-    });
-    toast.present();
-  }
-
   getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  checkIcon(num: number) {
+    return {
+      2: 'O',
+      1: 'X',
+    }[num];
   }
 }
