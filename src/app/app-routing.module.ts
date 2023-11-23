@@ -10,6 +10,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'game',
+    loadComponent: () =>
+      import('./components/game/game.component').then((m) => m.GameComponent),
+  },
+  {
     path: 'roostergame',
     loadChildren: () =>
       import('./roostergame/roostergame.module').then(
