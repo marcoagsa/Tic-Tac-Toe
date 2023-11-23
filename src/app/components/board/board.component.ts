@@ -7,25 +7,41 @@ import { TictactoeIconComponent } from '..';
   standalone: true,
   imports: [IonicModule, TictactoeIconComponent],
   template: `
-    <ion-card [disabled]="disable" mode="ios">
+    <ion-card [disabled]="disabled" mode="ios">
       <ion-grid mode="ios">
         <ion-row mode="ios">
-          <ion-col
-            mode="ios"
-            size="4"
-            class="border"
-            *ngFor="let val of boardGamePositions; let i = index"
-          >
+          @for(val of boardGamePositions; track val; let i = $index){
+          <ion-col mode="ios" size="4" class="border">
             <app-tictactoe-icon [value]="val" (click)="triggerClick.emit(i)" />
           </ion-col>
+          }
         </ion-row>
       </ion-grid>
     </ion-card>
   `,
-  styles: ``,
+  styles: `
+
+  ion-col {
+  display: flex;
+  justify-content: center;
+}
+
+.label--user {
+  padding-left: 5px;
+  font-size: 30px;
+}
+
+.label--cpu {
+  padding-right: 5px;
+  font-size: 30px;
+}
+
+ion-col.border {
+  border: solid 1px #9d9fa6;
+}`,
 })
 export class BoardComponent {
-  @Input({ required: true }) disable: boolean;
+  @Input({ required: true }) disabled: boolean;
   @Input({ required: true }) boardGamePositions: number[];
   @Output() triggerClick = new EventEmitter<number>();
 }
