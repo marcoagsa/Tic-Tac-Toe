@@ -3,16 +3,23 @@ import { IonicModule } from '@ionic/angular';
 import { HelpService } from 'src/app/services/help.service';
 import { BoardComponent, ButtonComponent, ScoreHeaderComponent } from '..';
 import { POSITIONS_OF_WINS } from 'src/app/constants';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [IonicModule, ScoreHeaderComponent, BoardComponent, ButtonComponent],
+  imports: [
+    IonicModule,
+    ScoreHeaderComponent,
+    BoardComponent,
+    ButtonComponent,
+    UpperCasePipe,
+  ],
   template: `
     <app-score-header
       [userIsNext]="userIsNext"
       [userIcon]="userIcon"
-      [cpuIcon]="cpuIcon"
+      [logicIcon]="logicIcon"
       [userWins]="userWins"
       [cpuWins]="cpuWins"
       [winner]="winner"
@@ -37,26 +44,19 @@ import { POSITIONS_OF_WINS } from 'src/app/constants';
   styles: ``,
 })
 export class GameComponent implements OnInit {
-  buttonLabel: string = 'New Game';
-
-  userIcon: number = null;
-  cpuIcon: number = null;
-  userWins = 0;
-  cpuWins = 0;
-
-  boardGamePositions: number[];
-  winner: number;
-  lastWinner: number;
-  userIsNext: boolean;
-
-  positionsOfWins = POSITIONS_OF_WINS;
-
   readonly helperService = inject(HelpService);
-
-  constructor() {}
+  positionsOfWins = POSITIONS_OF_WINS;
+  boardGamePositions: number[];
+  buttonLabel: string = 'New Game';
+  userIcon: number = null;
+  logicIcon: number = null;
+  userIsNext: boolean;
+  winner: number | undefined;
+  userWins: number = 0;
+  cpuWins: number = 0;
 
   get player() {
-    return this.userIsNext ? this.userIcon : this.cpuIcon;
+    return this.userIsNext ? this.userIcon : this.logicIcon;
   }
 
   get disableButton() {
@@ -65,6 +65,10 @@ export class GameComponent implements OnInit {
 
   get disableBoard() {
     return this.winner !== null || this.isDraw();
+  }
+
+  get userWin() {
+    return this.winner === this.userIcon;
   }
 
   async ngOnInit() {
@@ -79,7 +83,7 @@ export class GameComponent implements OnInit {
       return;
     }
     this.userIcon = data;
-    this.cpuIcon = data === 2 ? 1 : 2;
+    this.logicIcon = data === 2 ? 1 : 2;
   }
 
   init(): void {
@@ -106,7 +110,7 @@ export class GameComponent implements OnInit {
     }
     this.winner = this.checkWinner();
     if (this.winner !== null) {
-      this.countWins(this.winner);
+      this.updateWinner();
     }
     if (!this.userIsNext && this.winner === null && !this.isDraw()) {
       this.helperService.showLoading();
@@ -117,52 +121,34 @@ export class GameComponent implements OnInit {
   logicalMove(): void {
     const timeout = 1000;
     setTimeout(() => {
-      let posicaoParaVitoria = this.verificarVitoria(
-        this.boardGamePositions,
-        this.positionsOfWins
-      );
+      const logicPosition = this.checkVictoryPosition();
+      console.log(`MSA 🔊 logicPosition:`, logicPosition);
 
-      if (posicaoParaVitoria === null) {
-        posicaoParaVitoria = this.boardGamePositions.find(
-          (position) => position !== null
-        );
-      }
-
-      if (
-        !this.boardGamePositions[posicaoParaVitoria] &&
-        this.winner === null
-      ) {
+      if (!this.boardGamePositions[logicPosition] && this.winner === null) {
         this.helperService.hideLoading();
-        this.boardGamePositions.splice(posicaoParaVitoria, 1, this.player);
+        this.boardGamePositions.splice(logicPosition, 1, this.player);
         this.userIsNext = !this.userIsNext;
+      } else {
+        this.logicalMove();
       }
       this.winner = this.checkWinner();
       if (this.winner !== null) {
-        this.countWins(this.winner);
+        this.updateWinner();
       }
     }, timeout);
   }
 
-  countWins(winner): void {
-    if (winner === this.userIcon) {
-      this.userWins = this.userWins + 1;
-      this.helperService.presentToast('congratulations you win!');
-    } else {
-      this.cpuWins = this.cpuWins + 1;
-      this.helperService.presentToast('try again, you lose!');
-    }
+  updateWinner(): void {
+    this.userWin ? (this.userWins += 1) : (this.cpuWins += 1);
   }
 
-  verificarVitoria(
-    board: number[],
-    positionsOfWins: number[][]
-  ): number | null {
-    for (const position of positionsOfWins) {
+  checkVictoryPosition(): number {
+    for (const position of this.positionsOfWins) {
       const [posicao1, posicao2, posicao3] = position;
 
-      const simboloPosicao1 = board[posicao1];
-      const simboloPosicao2 = board[posicao2];
-      const simboloPosicao3 = board[posicao3];
+      const simboloPosicao1 = this.boardGamePositions[posicao1];
+      const simboloPosicao2 = this.boardGamePositions[posicao2];
+      const simboloPosicao3 = this.boardGamePositions[posicao3];
 
       if (
         simboloPosicao1 !== null &&
@@ -186,7 +172,12 @@ export class GameComponent implements OnInit {
         return posicao1;
       }
     }
-    return null;
+
+    const positions = this.boardGamePositions.filter(
+      (position) => position === null
+    );
+    const index = Math.floor(Math.random() * positions.length);
+    return index;
   }
 
   checkWinner(): number {
