@@ -20,25 +20,25 @@ import { TictactoeIconComponent } from '..';
     </ion-card>
   `,
   styles: `
+    ion-col {
+      display: flex;
+      justify-content: center;
+    }
 
-  ion-col {
-  display: flex;
-  justify-content: center;
-}
+    .label--user {
+      padding-left: 5px;
+      font-size: 30px;
+    }
 
-.label--user {
-  padding-left: 5px;
-  font-size: 30px;
-}
+    .label--cpu {
+      padding-right: 5px;
+      font-size: 30px;
+    }
 
-.label--cpu {
-  padding-right: 5px;
-  font-size: 30px;
-}
-
-ion-col.border {
-  border: solid 1px #9d9fa6;
-}`,
+    ion-col.border {
+      border: solid 1px #9d9fa6;
+    }
+`,
 })
 export class BoardComponent {
   @Input({ required: true }) disabled: boolean;
