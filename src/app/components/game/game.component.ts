@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { HelpService } from 'src/app/services/help.service';
 import { BoardComponent, ButtonComponent, ScoreHeaderComponent } from '..';
+import { POSITIONS_OF_WINS } from 'src/app/constants';
 
 @Component({
   selector: 'app-game',
@@ -20,21 +21,23 @@ import { BoardComponent, ButtonComponent, ScoreHeaderComponent } from '..';
     />
     <ion-content class="ion-padding" scrollY="false">
       <app-board
-        [disabled]="winner !== null || isDraw()"
+        [disabled]="disableBoard"
         [boardGamePositions]="boardGamePositions"
-        (triggerClick)="makeMove($event)"
+        (triggerClick)="userMove($event)"
       />
+    </ion-content>
+    <ion-footer class="ion-padding">
       <app-button
         [label]="buttonLabel"
         [disabled]="disableButton"
         (triggerClick)="init()"
       />
-    </ion-content>
+    </ion-footer>
   `,
   styles: ``,
 })
 export class GameComponent implements OnInit {
-  buttonLabel: string = 'New Game ???';
+  buttonLabel: string = 'New Game';
 
   userIcon: number = null;
   cpuIcon: number = null;
@@ -46,16 +49,7 @@ export class GameComponent implements OnInit {
   lastWinner: number;
   userIsNext: boolean;
 
-  positionsOfWins: number[][] = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
+  positionsOfWins = POSITIONS_OF_WINS;
 
   readonly helperService = inject(HelpService);
 
@@ -69,8 +63,12 @@ export class GameComponent implements OnInit {
     return this.winner === null && !this.isDraw();
   }
 
-  ngOnInit() {
-    this.iconPick();
+  get disableBoard() {
+    return this.winner !== null || this.isDraw();
+  }
+
+  async ngOnInit() {
+    await this.iconPick();
     this.init();
   }
 
@@ -101,7 +99,7 @@ export class GameComponent implements OnInit {
     return tie;
   }
 
-  makeMove(index: number): void {
+  userMove(index: number): void {
     if (!this.boardGamePositions[index] && this.winner === null) {
       this.boardGamePositions.splice(index, 1, this.player);
       this.userIsNext = !this.userIsNext;
@@ -112,11 +110,11 @@ export class GameComponent implements OnInit {
     }
     if (!this.userIsNext && this.winner === null && !this.isDraw()) {
       this.helperService.showLoading();
-      this.cpuMove();
+      this.logicalMove();
     }
   }
 
-  cpuMove(): void {
+  logicalMove(): void {
     const timeout = 1000;
     setTimeout(() => {
       let posicaoParaVitoria = this.verificarVitoria(
