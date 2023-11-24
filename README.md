@@ -13,9 +13,13 @@ This project uses Ionic as app development platform and the Ionic CLI.
 
 #
 
-![, Game Image](src/assets/git/git-3.png)
-![, Game Image](src/assets/git/git-1.png)
-![, Game Image](src/assets/git/git-2.png)
+![, Game Image](src/assets/git/git1.png)
+![, Game Image](src/assets/git/git2.png)
+![, Game Image](src/assets/git/git3.png)
+
+![, Game Image](src/assets/git/git4.png)
+![, Game Image](src/assets/git/git5.png)
+![, Game Image](src/assets/git/git6.png)
 
 # Development Setup 💻
 
