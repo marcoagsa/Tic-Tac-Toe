@@ -10,6 +10,7 @@ This is a rooster game, build with:
 This game can run in browser / android / ios
 
 This project uses Ionic as app development platform and the Ionic CLI.
+This project uses angular standalone components
 
 #
 
@@ -37,11 +38,11 @@ This project uses Ionic as app development platform and the Ionic CLI.
 
 **Change to the root directory of the project:**
 
-> cd RoosterGame
+> cd Tic-tac-toe
 
 **Install all dependencies:**
 
-> npm i
+> npm i or yarn
 
 **Prepare and launch the Android app:**
 
@@ -54,7 +55,3 @@ This project uses Ionic as app development platform and the Ionic CLI.
 > npx ionic cap sync ios
 >
 > npx ionic cap run ios
-
-**Android APK - DEMO:**
-
-> https://jof7uh.s.cld.pt
