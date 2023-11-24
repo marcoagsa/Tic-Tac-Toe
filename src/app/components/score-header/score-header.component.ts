@@ -25,17 +25,17 @@ import { IonicModule } from '@ionic/angular';
               />
             </ion-col>
             <ion-col size="8" class="center">
-              @if(userIcon !== null && winner === null){
-              <ion-text>
-                {{ nextPlayerLabel | titlecase }}
-              </ion-text>
-              <ion-label [color]="iconColor(player)" class="blink">
-                {{
-                  userIsNext
-                    ? helpService.checkIcon(userIcon)
-                    : helpService.checkIcon(logicIcon)
-                }}
-              </ion-label>
+              @if (userIcon !== null && winner === null) {
+                <ion-text>
+                  {{ nextPlayerLabel | titlecase }}
+                </ion-text>
+                <ion-label [color]="iconColor(player)" class="blink">
+                  {{
+                    userIsNext
+                      ? helpService.checkIcon(userIcon)
+                      : helpService.checkIcon(logicIcon)
+                  }}
+                </ion-label>
               }
             </ion-col>
             <ion-col size="2" class="cpu">
@@ -61,6 +61,11 @@ import { IonicModule } from '@ionic/angular';
     </ion-card>
   `,
   styles: `
+
+    ion-card {
+      margin:0;
+    }
+
     ion-grid {
       display:grid;
       gap:10px

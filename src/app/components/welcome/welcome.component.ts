@@ -13,9 +13,7 @@ import { ButtonComponent } from '../button/button.component';
       <ion-label mode="ios" class="title" color="tic-tac-toe">
         {{ pageTitle }}
       </ion-label>
-      <ion-card mode="ios">
-        <ion-img class="logo" [src]="gameLogo" />
-      </ion-card>
+      <ion-img class="logo" [src]="gameLogo" />
     </ion-content>
 
     <ion-footer mode="ios" class="ion-no-border ion-padding">
@@ -29,6 +27,7 @@ import { ButtonComponent } from '../button/button.component';
       font-family: monospace;
       text-align: -webkit-center;
       justify-content: center;
+      margin-top: 10%;
     }
     ion-card {
       background: var(--ion-background-color);
