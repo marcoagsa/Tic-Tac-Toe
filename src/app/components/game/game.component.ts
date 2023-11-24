@@ -17,21 +17,22 @@ import { UpperCasePipe } from '@angular/common';
   ],
   template: `
     <ion-content [fullscreen]="true" class="ion-padding" scrollY="false">
-      <app-score-header
-        [userIsNext]="userIsNext"
-        [userIcon]="userIcon"
-        [logicIcon]="logicIcon"
-        [userWins]="userWins"
-        [cpuWins]="cpuWins"
-        [winner]="winner"
-        [player]="player"
-        class="ion-padding"
-      />
-      <app-board
-        [disabled]="disableBoard"
-        [boardGamePositions]="boardGamePositions"
-        (triggerClick)="userMove($event)"
-      />
+      <ion-grid fixed>
+        <app-score-header
+          [userIsNext]="userIsNext"
+          [userIcon]="userIcon"
+          [logicIcon]="logicIcon"
+          [userWins]="userWins"
+          [cpuWins]="cpuWins"
+          [winner]="winner"
+          [player]="player"
+        />
+        <app-board
+          [disabled]="disableBoard"
+          [boardGamePositions]="boardGamePositions"
+          (triggerClick)="userMove($event)"
+        />
+      </ion-grid>
     </ion-content>
     <ion-footer class="ion-padding">
       <app-button
@@ -41,7 +42,14 @@ import { UpperCasePipe } from '@angular/common';
       />
     </ion-footer>
   `,
-  styles: ``,
+  styles: `
+    ion-grid {
+      display: grid;
+      gap:10px;
+      padding-top:10%;
+    }
+
+  `,
 })
 export class GameComponent implements OnInit {
   readonly helperService = inject(HelpService);

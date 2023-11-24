@@ -23,7 +23,6 @@ import { TictactoeIconComponent } from '..';
     </ion-card>
   `,
   styles: `
-
     ion-card {
       margin:0;
     }

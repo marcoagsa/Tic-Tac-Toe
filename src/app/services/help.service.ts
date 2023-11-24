@@ -20,7 +20,7 @@ export class HelpService {
       backdropDismiss: false,
       showBackdrop: true,
       keyboardClose: true,
-      breakpoints: [0, 0.25],
+      breakpoints: [0.25],
       initialBreakpoint: 0.25,
       handleBehavior: 'cycle',
     });
