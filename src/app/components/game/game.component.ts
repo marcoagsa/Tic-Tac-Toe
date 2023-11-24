@@ -16,17 +16,17 @@ import { UpperCasePipe } from '@angular/common';
     UpperCasePipe,
   ],
   template: `
-    <app-score-header
-      [userIsNext]="userIsNext"
-      [userIcon]="userIcon"
-      [logicIcon]="logicIcon"
-      [userWins]="userWins"
-      [cpuWins]="cpuWins"
-      [winner]="winner"
-      [player]="player"
-      class="ion-padding"
-    />
-    <ion-content class="ion-padding" scrollY="false">
+    <ion-content [fullscreen]="true" class="ion-padding" scrollY="false">
+      <app-score-header
+        [userIsNext]="userIsNext"
+        [userIcon]="userIcon"
+        [logicIcon]="logicIcon"
+        [userWins]="userWins"
+        [cpuWins]="cpuWins"
+        [winner]="winner"
+        [player]="player"
+        class="ion-padding"
+      />
       <app-board
         [disabled]="disableBoard"
         [boardGamePositions]="boardGamePositions"
