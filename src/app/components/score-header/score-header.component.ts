@@ -11,8 +11,8 @@ import { HelpService } from 'src/app/services/help.service';
   template: `
     <ion-card>
       <ion-card-header>
-        <ion-card-subtitle>Game Score</ion-card-subtitle>
-        <ion-card-title>Tic Tac Toe</ion-card-title>
+        <ion-card-subtitle>{{ subTitle }}</ion-card-subtitle>
+        <ion-card-title>{{ title }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <ion-grid>
@@ -132,6 +132,8 @@ export class ScoreHeaderComponent {
   @Input({ required: true }) scorePanel: ScorePanel;
   @Input({ required: true }) player: number;
 
+  readonly title: string = 'Tic Tac Toe';
+  readonly subTitle: string = 'Game Score';
   readonly nextPlayerLabel: string = 'Next Player';
   readonly helpService = inject(HelpService);
 
