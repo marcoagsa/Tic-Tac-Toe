@@ -1,25 +1,25 @@
-import { Component, OnInit, computed, inject, signal } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Signal,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { HelpService } from 'src/app/services/help.service';
 import { BoardComponent, ButtonComponent, ScoreHeaderComponent } from '..';
 import { POSITIONS_OF_WINS } from 'src/app/constants';
-import { UpperCasePipe } from '@angular/common';
 import { ScorePanel } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [
-    IonicModule,
-    ScoreHeaderComponent,
-    BoardComponent,
-    ButtonComponent,
-    UpperCasePipe,
-  ],
+  imports: [IonicModule, ScoreHeaderComponent, BoardComponent, ButtonComponent],
   template: `
     <ion-content [fullscreen]="true" class="ion-padding" scrollY="false">
       <ion-grid fixed>
-        <app-score-header [scorePanel]="scorePanel()" />
+        <app-score-header [scorePanel]="scorePanel()" [player]="player" />
         <app-board
           [disabled]="disableBoard"
           [boardGamePositions]="boardGamePositions"
@@ -41,7 +41,6 @@ import { ScorePanel } from 'src/app/interfaces';
       gap:10px;
       padding-top:10%;
     }
-
   `,
 })
 export class GameComponent implements OnInit {
@@ -50,20 +49,18 @@ export class GameComponent implements OnInit {
   public boardGamePositions: number[];
   readonly buttonLabel: string = 'New Game';
 
-  readonly scorePanel = signal<ScorePanel>({
+  scorePanel = signal<ScorePanel>({
     userIcon: null,
     logicIcon: null,
     userIsNext: false,
     winner: undefined,
     userWins: 0,
     logicWins: 0,
-    player: null,
   });
 
   get player() {
-    return this.scorePanel().userIsNext
-      ? this.scorePanel().userIcon
-      : this.scorePanel().logicIcon;
+    const { logicIcon, userIsNext, userIcon } = this.scorePanel();
+    return userIsNext ? userIcon : logicIcon;
   }
 
   get disableButton() {
@@ -130,7 +127,7 @@ export class GameComponent implements OnInit {
   }
 
   logicalMove(): void {
-    const timeout = 500;
+    const timeout = 3000;
 
     setTimeout(() => {
       const logicPosition = this.logicAvoidUserVictory();

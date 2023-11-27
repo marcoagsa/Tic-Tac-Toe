@@ -1,8 +1,8 @@
-import { HelpService } from 'src/app/services/help.service';
 import { NgClass, TitleCasePipe } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { ScorePanel } from 'src/app/interfaces';
+import { HelpService } from 'src/app/services/help.service';
 
 @Component({
   selector: 'app-score-header',
@@ -32,7 +32,7 @@ import { ScorePanel } from 'src/app/interfaces';
                 <ion-text>
                   {{ nextPlayerLabel | titlecase }}
                 </ion-text>
-                <ion-label [color]="iconColor(scorePanel.player)" class="blink">
+                <ion-label [color]="iconColor(player)" class="blink">
                   {{
                     scorePanel.userIsNext
                       ? helpService.checkIcon(scorePanel.userIcon)
@@ -129,18 +129,10 @@ import { ScorePanel } from 'src/app/interfaces';
   `,
 })
 export class ScoreHeaderComponent {
-  // @Input({ required: true }) player: number;
-  // @Input({ required: true }) userIsNext: boolean;
-  // @Input({ required: true }) userIcon: number;
-  // @Input({ required: true }) logicIcon: number;
-  // @Input({ required: true }) winner: number;
-  // @Input({ required: true }) userWins: number;
-  // @Input({ required: true }) cpuWins: number;
-
   @Input({ required: true }) scorePanel: ScorePanel;
+  @Input({ required: true }) player: number;
 
-  nextPlayerLabel: string = 'Next Player';
-
+  readonly nextPlayerLabel: string = 'Next Player';
   readonly helpService = inject(HelpService);
 
   iconColor(num: number) {

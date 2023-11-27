@@ -5,5 +5,4 @@ export interface ScorePanel {
   winner: number;
   userWins: number;
   logicWins: number;
-  player: number;
 }
