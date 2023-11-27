@@ -127,7 +127,7 @@ export class GameComponent implements OnInit {
   }
 
   logicalMove(): void {
-    const timeout = 3000;
+    const timeout = 500;
 
     setTimeout(() => {
       const logicPosition = this.logicAvoidUserVictory();
@@ -163,13 +163,13 @@ export class GameComponent implements OnInit {
       const p2 = this.boardGamePositions[pos2];
       const p3 = this.boardGamePositions[pos3];
 
-      if (p1 !== null && p1 === p2 && p3 === null) {
+      if (p1 && p1 === p2 && p3 === null) {
         return pos3;
       }
-      if (p1 !== null && p1 === p3 && p2 === null) {
+      if (p1 && p1 === p3 && p2 === null) {
         return pos2;
       }
-      if (p2 !== null && p2 === p3 && p1 === null) {
+      if (p2 && p2 === p3 && p1 === null) {
         return pos1;
       }
     }
