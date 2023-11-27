@@ -61,15 +61,27 @@ export class GameComponent implements OnInit {
   }
 
   get disableButton() {
-    return !this.scorePanel().winner && !this.isDraw();
+    return !this.scorePanel().winner && !this.isDraw;
   }
 
   get disableBoard() {
-    return !!this.scorePanel().winner ?? this.isDraw();
+    return !!this.scorePanel().winner ?? this.isDraw;
   }
 
   get userWin() {
     return this.scorePanel().winner === this.scorePanel().userIcon;
+  }
+
+  get isDraw(): boolean {
+    return (
+      this.boardGamePositions?.filter((el) => el === null)?.length === 0 &&
+      !this.scorePanel().winner
+    );
+  }
+
+  get winnerOrDraw() {
+    this.scorePanel().winner = this.checkWinner();
+    return this.scorePanel().winner || this.isDraw;
   }
 
   async ngOnInit() {
@@ -93,18 +105,15 @@ export class GameComponent implements OnInit {
     this.scorePanel().userIsNext = true;
   }
 
-  isDraw(): boolean {
-    return (
-      this.boardGamePositions?.filter((el) => el === null)?.length === 0 &&
-      !this.scorePanel().winner
-    );
-  }
-
   updateWinner(): void {
     this.userWin
       ? (this.scorePanel().userWins += 1)
       : (this.scorePanel().logicWins += 1);
     this.showAlertWinner();
+  }
+
+  changePlayer() {
+    this.scorePanel().userIsNext = !this.scorePanel().userIsNext;
   }
 
   async showAlertWinner() {
@@ -120,46 +129,37 @@ export class GameComponent implements OnInit {
     }
   }
 
-  userMove(index: number): void {
-    if (!this.boardGamePositions[index] && !this.scorePanel().winner) {
-      this.boardGamePositions.splice(index, 1, this.player);
-      this.scorePanel().userIsNext = !this.scorePanel().userIsNext;
-    }
-    this.scorePanel().winner = this.checkWinner();
-    if (this.scorePanel().winner !== null) {
+  userMove(position: number) {
+    this.addPosition(position);
+    if (this.winnerOrDraw) {
       this.updateWinner();
-    }
-    if (
-      !this.scorePanel().userIsNext &&
-      !this.scorePanel().winner &&
-      !this.isDraw()
-    ) {
-      this.helperService.showLoading();
+    } else {
+      this.changePlayer();
       this.logicMove();
     }
   }
 
-  logicMove(): void {
-    const timeout = 500;
-
+  logicMove() {
+    if (this.winnerOrDraw) {
+      this.updateWinner();
+    }
+    this.helperService.showLoading();
+    let logicPosition = this.avoidUserVictory();
     setTimeout(() => {
-      const logicPosition = this.avoidUserVictory();
-
-      if (
-        !this.boardGamePositions[logicPosition] &&
-        !this.scorePanel().winner
-      ) {
-        this.boardGamePositions.splice(logicPosition, 1, this.player);
-        this.scorePanel().userIsNext = !this.scorePanel().userIsNext;
-        this.helperService.hideLoading();
+      if (!this.boardGamePositions[logicPosition]) {
+        this.addPosition(logicPosition);
       } else {
-        this.logicMove();
+        logicPosition = this.findAvailablePosition();
+        this.addPosition(logicPosition);
       }
-      this.scorePanel().winner = this.checkWinner();
-      if (this.scorePanel().winner !== null) {
-        this.updateWinner();
-      }
-    }, timeout);
+
+      this.helperService.hideLoading();
+      this.winnerOrDraw ? this.updateWinner() : this.changePlayer();
+    }, 500);
+  }
+
+  addPosition(position: number) {
+    this.boardGamePositions.splice(position, 1, this.player);
   }
 
   avoidUserVictory(): number {
@@ -184,8 +184,11 @@ export class GameComponent implements OnInit {
     return this.logicRadomMove();
   }
 
+  findAvailablePosition(): number {
+    return this.boardGamePositions.findIndex((el) => el === null);
+  }
+
   logicRadomMove(): number {
-    // fix issue
     let pos: number[] = [];
     for (const [index, value] of this.boardGamePositions.entries()) {
       if (value === null) {
