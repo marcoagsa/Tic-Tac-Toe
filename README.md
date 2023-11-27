@@ -1,6 +1,6 @@
 # Tic-Tac-Toe
 
-This is a rooster game, build with:
+This is a Tic-Tac-Toe game, build with:
 
 - Ionic framework V7
 - Angular V17
