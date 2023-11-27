@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, effect, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { POSITIONS_OF_WINS } from 'src/app/constants';
@@ -24,10 +24,16 @@ import { BoardComponent, ButtonComponent, ScoreHeaderComponent } from '..';
       </ion-grid>
     </ion-content>
     <ion-footer class="ion-padding">
+      <app-button [label]="stopGame" (triggerClick)="goHome()" />
       <app-button
-        [label]="buttonLabel"
+        [label]="selectIcon"
         [disabled]="disableButton"
-        (triggerClick)="init()"
+        (triggerClick)="iconPick()"
+      />
+      <app-button
+        [label]="startGame"
+        [disabled]="disableButton"
+        (triggerClick)="initGame()"
       />
     </ion-footer>
   `,
@@ -37,10 +43,17 @@ import { BoardComponent, ButtonComponent, ScoreHeaderComponent } from '..';
       gap:10px;
       padding-top:10%;
     }
+
+    ion-footer {
+      display: flex;
+      justify-content: space-evenly;
+    }
   `,
 })
 export class GameComponent implements OnInit {
-  readonly buttonLabel: string = 'New Game';
+  readonly startGame: string = 'New Game';
+  readonly selectIcon: string = 'Change Icon';
+  readonly stopGame: string = 'Home';
   readonly positionsOfWins = POSITIONS_OF_WINS;
   readonly helperService = inject(HelpService);
   readonly routerCtrl = inject(Router);
@@ -86,7 +99,7 @@ export class GameComponent implements OnInit {
 
   async ngOnInit() {
     await this.iconPick();
-    this.init();
+    this.initGame();
   }
 
   async iconPick(): Promise<any> {
@@ -99,7 +112,12 @@ export class GameComponent implements OnInit {
     this.scorePanel().logicIcon = data === 2 ? 1 : 2;
   }
 
-  init(): void {
+  goHome() {
+    this.initGame();
+    this.routerCtrl.navigateByUrl('/welcome');
+  }
+
+  initGame() {
     this.boardGamePositions = Array(9).fill(null);
     this.scorePanel().winner = null;
     this.scorePanel().userIsNext = true;
@@ -128,7 +146,7 @@ export class GameComponent implements OnInit {
     );
 
     if (role === 'cancel') {
-      this.init();
+      this.initGame();
       return this.routerCtrl.navigateByUrl('/welcome');
     }
   }

@@ -20,7 +20,7 @@ import { IonicModule } from '@ionic/angular';
       {{ label | titlecase }}
     </ion-button>
   `,
-  styles: ``,
+  styles: `ion-button {font-size:14px; margin: 0;}`,
 })
 export class ButtonComponent {
   @Input({ required: true }) label: string;
