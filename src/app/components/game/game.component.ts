@@ -117,7 +117,11 @@ export class GameComponent implements OnInit {
   }
 
   async showAlertWinner() {
-    const whoWon = this.userWin ? 'You' : 'Your Mobile';
+    const whoWon = this.userWin
+      ? 'You'
+      : this.isDraw
+        ? 'Draw / Tie'
+        : 'Your Mobile';
     const { role } = await this.helperService.winnerAlert(
       this.scorePanel().winner,
       whoWon,

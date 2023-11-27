@@ -52,11 +52,14 @@ export class HelpService {
         role: 'confirm',
       },
     ];
+
     const alert = await this.alertController.create({
-      header: 'The winner ',
-      message: `The winner on this time was: <br>  <ion-text> ${whoWon} </ion-text class"danger"> <br> <ion-note class="${
-        winner === 2 ? 'danger' : 'tic-tac-toe'
-      }"> ${this.checkIcon(winner)} </ion-note>`,
+      header: whoWon.includes('Draw') ? 'No Winner' : 'The winner ',
+      message: whoWon.includes('Draw')
+        ? 'This time there was no winner!'
+        : `The winner on this time was: <br>  <ion-text> ${whoWon} </ion-text class"danger"> <br> <ion-note class="${
+            winner === 2 ? 'danger' : 'tic-tac-toe'
+          }"> ${this.checkIcon(winner)} </ion-note>`,
       buttons: alertButtons,
       backdropDismiss: false,
       translucent: true,
