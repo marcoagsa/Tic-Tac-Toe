@@ -10,7 +10,7 @@ import { IonicModule } from '@ionic/angular';
     <ion-button
       class="ion-margin"
       expand="block"
-      color="tic-tac-toe"
+      [color]="color"
       shape="round"
       size="large"
       mode="ios"
@@ -25,5 +25,6 @@ import { IonicModule } from '@ionic/angular';
 export class ButtonComponent {
   @Input({ required: true }) label: string;
   @Input() disabled: boolean | undefined;
+  @Input() color: string = 'tic-tac-toe';
   @Output() triggerClick = new EventEmitter();
 }

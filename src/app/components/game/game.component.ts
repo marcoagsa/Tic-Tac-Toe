@@ -24,10 +24,15 @@ import { BoardComponent, ButtonComponent, ScoreHeaderComponent } from '..';
       </ion-grid>
     </ion-content>
     <ion-footer class="ion-padding">
-      <app-button [label]="stopGame" (triggerClick)="goHome()" />
+      <app-button
+        [label]="stopGame"
+        [color]="'danger'"
+        (triggerClick)="goHome()"
+      />
       <app-button
         [label]="selectIcon"
         [disabled]="disableButton"
+        [color]="'warning'"
         (triggerClick)="iconPick()"
       />
       <app-button
@@ -53,7 +58,7 @@ import { BoardComponent, ButtonComponent, ScoreHeaderComponent } from '..';
 export class GameComponent implements OnInit {
   readonly startGame: string = 'New Game';
   readonly selectIcon: string = 'Change Icon';
-  readonly stopGame: string = 'Home';
+  readonly stopGame: string = 'Stop Game';
   readonly positionsOfWins = POSITIONS_OF_WINS;
   readonly helperService = inject(HelpService);
   readonly routerCtrl = inject(Router);
