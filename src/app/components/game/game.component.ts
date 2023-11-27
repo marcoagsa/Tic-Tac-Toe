@@ -1,9 +1,10 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { HelpService } from 'src/app/services/help.service';
-import { BoardComponent, ButtonComponent, ScoreHeaderComponent } from '..';
 import { POSITIONS_OF_WINS } from 'src/app/constants';
+import { HelpService } from 'src/app/services/help.service';
 import { ScorePanel } from 'src/app/interfaces';
+import { BoardComponent, ButtonComponent, ScoreHeaderComponent } from '..';
 
 @Component({
   selector: 'app-game',
@@ -42,6 +43,7 @@ export class GameComponent implements OnInit {
   readonly buttonLabel: string = 'New Game';
   readonly positionsOfWins = POSITIONS_OF_WINS;
   readonly helperService = inject(HelpService);
+  readonly routerCtrl = inject(Router);
 
   public boardGamePositions: number[];
   public scorePanel = signal<ScorePanel>({
@@ -102,6 +104,18 @@ export class GameComponent implements OnInit {
     this.userWin
       ? (this.scorePanel().userWins += 1)
       : (this.scorePanel().logicWins += 1);
+    this.showAlertWinner();
+  }
+
+  async showAlertWinner() {
+    const { role } = await this.helperService.winnerAlert(
+      this.scorePanel().winner,
+    );
+
+    if (role === 'cancel') {
+      this.init();
+      return this.routerCtrl.navigateByUrl('/welcome');
+    }
   }
 
   userMove(index: number): void {

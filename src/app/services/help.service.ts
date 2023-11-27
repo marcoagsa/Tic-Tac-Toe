@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import {
+  AlertController,
   LoadingController,
   ModalController,
-  ToastController,
 } from '@ionic/angular';
 import { SelectTictactoeIconComponent } from '../modal';
 
@@ -11,7 +11,7 @@ import { SelectTictactoeIconComponent } from '../modal';
 })
 export class HelpService {
   readonly modalController = inject(ModalController);
-  readonly toastController = inject(ToastController);
+  readonly alertController = inject(AlertController);
   readonly loadingCtrl = inject(LoadingController);
 
   async openModal() {
@@ -41,11 +41,31 @@ export class HelpService {
     this.loadingCtrl.dismiss();
   }
 
-  // getRandomIntInclusive(min, max) {
-  //   min = Math.ceil(min);
-  //   max = Math.floor(max);
-  //   return Math.floor(Math.random() * (max - min + 1)) + min;
-  // }
+  async winnerAlert(winner: number) {
+    console.log(`MSA 🔊 winner:`, winner);
+    const alertButtons = [
+      {
+        text: 'Exit',
+        role: 'cancel',
+      },
+      {
+        text: 'Again',
+        role: 'confirm',
+      },
+    ];
+
+    const alert = await this.alertController.create({
+      header: 'A Short Title Is Best',
+      subHeader: 'A Sub Header Is Optional',
+      message: 'A message should be a short, complete sentence.',
+      buttons: alertButtons,
+      backdropDismiss: false,
+      translucent: true,
+    });
+
+    await alert.present();
+    return await alert.onDidDismiss();
+  }
 
   checkIcon(num: number) {
     return {
