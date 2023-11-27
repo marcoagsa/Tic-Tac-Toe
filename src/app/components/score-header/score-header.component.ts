@@ -16,7 +16,7 @@ import { HelpService } from 'src/app/services/help.service';
       </ion-card-header>
       <ion-card-content>
         <ion-grid>
-          <ion-row>
+          <ion-row class="header">
             <ion-col size="2">
               <ion-icon
                 mode="ios"
@@ -55,10 +55,10 @@ import { HelpService } from 'src/app/services/help.service';
 
           <ion-row class="wins">
             <ion-label class="padding-left">
-              {{ scorePanel.userWins }}
+              {{ scorePanel.userWins ?? 0 }}
             </ion-label>
             <ion-label class="padding-right">
-              {{ scorePanel.logicWins }}
+              {{ scorePanel.logicWins ?? 0 }}
             </ion-label>
           </ion-row>
         </ion-grid>
@@ -74,6 +74,10 @@ import { HelpService } from 'src/app/services/help.service';
     ion-grid {
       display:grid;
       gap:10px
+    }
+
+    ion-row.header {
+      height: 50px
     }
 
     ion-col {
