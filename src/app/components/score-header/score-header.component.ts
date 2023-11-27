@@ -2,6 +2,7 @@ import { HelpService } from 'src/app/services/help.service';
 import { NgClass, TitleCasePipe } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { ScorePanel } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-score-header',
@@ -20,20 +21,22 @@ import { IonicModule } from '@ionic/angular';
               <ion-icon
                 mode="ios"
                 name="person-outline"
-                [color]="iconColor(userIcon)"
-                [ngClass]="{ blink: userIsNext && userIcon }"
+                [color]="iconColor(scorePanel.userIcon)"
+                [ngClass]="{
+                  blink: scorePanel.userIsNext && scorePanel.userIcon
+                }"
               />
             </ion-col>
             <ion-col size="8" class="center">
-              @if (userIcon !== null && winner === null) {
+              @if (scorePanel.userIcon !== null && scorePanel.winner === null) {
                 <ion-text>
                   {{ nextPlayerLabel | titlecase }}
                 </ion-text>
-                <ion-label [color]="iconColor(player)" class="blink">
+                <ion-label [color]="iconColor(scorePanel.player)" class="blink">
                   {{
-                    userIsNext
-                      ? helpService.checkIcon(userIcon)
-                      : helpService.checkIcon(logicIcon)
+                    scorePanel.userIsNext
+                      ? helpService.checkIcon(scorePanel.userIcon)
+                      : helpService.checkIcon(scorePanel.logicIcon)
                   }}
                 </ion-label>
               }
@@ -42,18 +45,20 @@ import { IonicModule } from '@ionic/angular';
               <ion-icon
                 mode="ios"
                 name="laptop-outline"
-                [color]="iconColor(logicIcon)"
-                [ngClass]="{ blink: !userIsNext && userIcon }"
+                [color]="iconColor(scorePanel.logicIcon)"
+                [ngClass]="{
+                  blink: !scorePanel.userIsNext && scorePanel.userIcon
+                }"
               />
             </ion-col>
           </ion-row>
 
           <ion-row class="wins">
             <ion-label class="padding-left">
-              {{ userWins }}
+              {{ scorePanel.userWins }}
             </ion-label>
             <ion-label class="padding-right">
-              {{ cpuWins }}
+              {{ scorePanel.logicWins }}
             </ion-label>
           </ion-row>
         </ion-grid>
@@ -124,13 +129,15 @@ import { IonicModule } from '@ionic/angular';
   `,
 })
 export class ScoreHeaderComponent {
-  @Input({ required: true }) player: number;
-  @Input({ required: true }) userIsNext: boolean;
-  @Input({ required: true }) userIcon: number;
-  @Input({ required: true }) logicIcon: number;
-  @Input({ required: true }) winner: number;
-  @Input({ required: true }) userWins: number;
-  @Input({ required: true }) cpuWins: number;
+  // @Input({ required: true }) player: number;
+  // @Input({ required: true }) userIsNext: boolean;
+  // @Input({ required: true }) userIcon: number;
+  // @Input({ required: true }) logicIcon: number;
+  // @Input({ required: true }) winner: number;
+  // @Input({ required: true }) userWins: number;
+  // @Input({ required: true }) cpuWins: number;
+
+  @Input({ required: true }) scorePanel: ScorePanel;
 
   nextPlayerLabel: string = 'Next Player';
 

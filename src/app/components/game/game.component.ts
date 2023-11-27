@@ -1,9 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { HelpService } from 'src/app/services/help.service';
 import { BoardComponent, ButtonComponent, ScoreHeaderComponent } from '..';
 import { POSITIONS_OF_WINS } from 'src/app/constants';
 import { UpperCasePipe } from '@angular/common';
+import { ScorePanel } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-game',
@@ -18,15 +19,7 @@ import { UpperCasePipe } from '@angular/common';
   template: `
     <ion-content [fullscreen]="true" class="ion-padding" scrollY="false">
       <ion-grid fixed>
-        <app-score-header
-          [userIsNext]="userIsNext"
-          [userIcon]="userIcon"
-          [logicIcon]="logicIcon"
-          [userWins]="userWins"
-          [cpuWins]="cpuWins"
-          [winner]="winner"
-          [player]="player"
-        />
+        <app-score-header [scorePanel]="scorePanel()" />
         <app-board
           [disabled]="disableBoard"
           [boardGamePositions]="boardGamePositions"
@@ -53,30 +46,36 @@ import { UpperCasePipe } from '@angular/common';
 })
 export class GameComponent implements OnInit {
   readonly helperService = inject(HelpService);
-  positionsOfWins = POSITIONS_OF_WINS;
-  boardGamePositions: number[];
-  buttonLabel: string = 'New Game';
-  userIcon: number = null;
-  logicIcon: number = null;
-  userIsNext: boolean;
-  winner: number | undefined;
-  userWins: number = 0;
-  cpuWins: number = 0;
+  readonly positionsOfWins = POSITIONS_OF_WINS;
+  public boardGamePositions: number[];
+  readonly buttonLabel: string = 'New Game';
+
+  readonly scorePanel = signal<ScorePanel>({
+    userIcon: null,
+    logicIcon: null,
+    userIsNext: false,
+    winner: undefined,
+    userWins: 0,
+    logicWins: 0,
+    player: null,
+  });
 
   get player() {
-    return this.userIsNext ? this.userIcon : this.logicIcon;
+    return this.scorePanel().userIsNext
+      ? this.scorePanel().userIcon
+      : this.scorePanel().logicIcon;
   }
 
   get disableButton() {
-    return this.winner === null && !this.isDraw();
+    return this.scorePanel().winner === null && !this.isDraw();
   }
 
   get disableBoard() {
-    return this.winner !== null || this.isDraw();
+    return this.scorePanel().winner !== null || this.isDraw();
   }
 
   get userWin() {
-    return this.winner === this.userIcon;
+    return this.scorePanel().winner === this.scorePanel().userIcon;
   }
 
   async ngOnInit() {
@@ -90,21 +89,21 @@ export class GameComponent implements OnInit {
     if (!data) {
       return;
     }
-    this.userIcon = data;
-    this.logicIcon = data === 2 ? 1 : 2;
+    this.scorePanel().userIcon = data;
+    this.scorePanel().logicIcon = data === 2 ? 1 : 2;
   }
 
   init(): void {
     this.boardGamePositions = Array(9).fill(null);
-    this.winner = null;
-    this.userIsNext = true;
+    this.scorePanel().winner = null;
+    this.scorePanel().userIsNext = true;
   }
 
   isDraw(): boolean {
     let tie = false;
     if (
       this.boardGamePositions.filter((el) => el === null).length === 0 &&
-      this.winner === null
+      this.scorePanel().winner === null
     ) {
       tie = true;
     }
@@ -112,15 +111,19 @@ export class GameComponent implements OnInit {
   }
 
   userMove(index: number): void {
-    if (!this.boardGamePositions[index] && this.winner === null) {
+    if (!this.boardGamePositions[index] && this.scorePanel().winner === null) {
       this.boardGamePositions.splice(index, 1, this.player);
-      this.userIsNext = !this.userIsNext;
+      this.scorePanel().userIsNext = !this.scorePanel().userIsNext;
     }
-    this.winner = this.checkWinner();
-    if (this.winner !== null) {
+    this.scorePanel().winner = this.checkWinner();
+    if (this.scorePanel().winner !== null) {
       this.updateWinner();
     }
-    if (!this.userIsNext && this.winner === null && !this.isDraw()) {
+    if (
+      !this.scorePanel().userIsNext &&
+      this.scorePanel().winner === null &&
+      !this.isDraw()
+    ) {
       this.helperService.showLoading();
       this.logicalMove();
     }
@@ -132,22 +135,27 @@ export class GameComponent implements OnInit {
     setTimeout(() => {
       const logicPosition = this.logicAvoidUserVictory();
 
-      if (!this.boardGamePositions[logicPosition] && this.winner === null) {
+      if (
+        !this.boardGamePositions[logicPosition] &&
+        this.scorePanel().winner === null
+      ) {
         this.boardGamePositions.splice(logicPosition, 1, this.player);
-        this.userIsNext = !this.userIsNext;
+        this.scorePanel().userIsNext = !this.scorePanel().userIsNext;
         this.helperService.hideLoading();
       } else {
         this.logicalMove();
       }
-      this.winner = this.checkWinner();
-      if (this.winner !== null) {
+      this.scorePanel().winner = this.checkWinner();
+      if (this.scorePanel().winner !== null) {
         this.updateWinner();
       }
     }, timeout);
   }
 
   updateWinner(): void {
-    this.userWin ? (this.userWins += 1) : (this.cpuWins += 1);
+    this.userWin
+      ? (this.scorePanel().userWins += 1)
+      : (this.scorePanel().logicWins += 1);
   }
 
   logicAvoidUserVictory(): number {
