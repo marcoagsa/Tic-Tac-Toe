@@ -6,7 +6,7 @@ const routes: Routes = [
     path: 'welcome',
     loadComponent: () =>
       import('./components/welcome/welcome.component').then(
-        (m) => m.WelcomeComponent
+        (m) => m.WelcomeComponent,
       ),
   },
   {

@@ -24,3 +24,38 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.custom-alert .alert-head {
+  background-color: var(--ion-color-tic-tac-toe);
+}
+
+.custom-alert .alert-message {
+  padding-top: 16px;
+  font-size: 15px;
+
+  ion-text {
+    font-size: 40px;
+  }
+
+  ion-note {
+    font-size: 40px;
+  }
+
+  .danger {
+    color: var(--ion-color-danger);
+  }
+
+  .tic-tac-toe {
+    color: var(--ion-color-tic-tac-toe);
+  }
+}
+
+.custom-alert button.alert-button.alert-button-role-confirm {
+  background-color: var(--ion-color-tic-tac-toe);
+  color: var(--ion-color-light-contrast);
+}
+
+.custom-alert button.alert-button.alert-button-role-cancel {
+  background-color: var(--ion-color-danger);
+  color: var(--ion-color-light-contrast);
+}

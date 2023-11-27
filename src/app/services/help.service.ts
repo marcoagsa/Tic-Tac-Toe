@@ -41,8 +41,7 @@ export class HelpService {
     this.loadingCtrl.dismiss();
   }
 
-  async winnerAlert(winner: number) {
-    console.log(`MSA 🔊 winner:`, winner);
+  async winnerAlert(winner: number, whoWon: string) {
     const alertButtons = [
       {
         text: 'Exit',
@@ -53,14 +52,15 @@ export class HelpService {
         role: 'confirm',
       },
     ];
-
     const alert = await this.alertController.create({
-      header: 'A Short Title Is Best',
-      subHeader: 'A Sub Header Is Optional',
-      message: 'A message should be a short, complete sentence.',
+      header: 'The winner ',
+      message: `The winner on this time was: <br>  <ion-text> ${whoWon} </ion-text class"danger"> <br> <ion-note class="${
+        winner === 2 ? 'danger' : 'tic-tac-toe'
+      }"> ${this.checkIcon(winner)} </ion-note>`,
       buttons: alertButtons,
       backdropDismiss: false,
       translucent: true,
+      cssClass: 'custom-alert',
     });
 
     await alert.present();

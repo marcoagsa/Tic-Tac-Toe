@@ -108,8 +108,10 @@ export class GameComponent implements OnInit {
   }
 
   async showAlertWinner() {
+    const whoWon = this.userWin ? 'You' : 'Your Mobile';
     const { role } = await this.helperService.winnerAlert(
       this.scorePanel().winner,
+      whoWon,
     );
 
     if (role === 'cancel') {
