@@ -133,9 +133,11 @@ export class GameComponent implements OnInit {
   }
 
   updateWinner(): void {
-    this.userWin
-      ? (this.scorePanel().userWins += 1)
-      : (this.scorePanel().logicWins += 1);
+    if (!this.isDraw) {
+      this.userWin
+        ? (this.scorePanel().userWins += 1)
+        : (this.scorePanel().logicWins += 1);
+    }
     this.showAlertWinner();
   }
 
