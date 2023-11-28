@@ -34,6 +34,10 @@ This project uses angular standalone components
 </video>
 <br/>
 
+
+https://github.com/marcoagsa/Tic-Tac-Toe/assets/14275804/1fc9f00b-19d8-4d40-a455-eecfdfcd3c0f
+
+
 # Development Setup 💻
 
 ### Prerequisites
