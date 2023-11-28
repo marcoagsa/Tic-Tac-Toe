@@ -1,9 +1,9 @@
 # Tic-Tac-Toe Game
 
-Welcome to the Tic-Tac-Toe game project! This project utilizes Ionic 7 and Angular 17 with standalone versions, incorporating the latest enhancements and components from Angular 17. Additionally, it employs Capacitor iOS and Android version 5 for cross-platform functionality.
+Welcome to the Tic-Tac-Toe game project! This project utilizes Ionic 7 and Angular 17 with standalone components and incorporates the latest features from Angular 17. Additionally, it employs Capacitor iOS and Android version 5 for cross-platform functionality.
 
 About the Project
-This game offers a classic Tic-Tac-Toe experience where players challenge an intelligent logic designed to thwart the user's victory. It's an engaging battle against an AI that strategizes to prevent your win in this timeless game.
+This game offers a classic Tic-Tac-Toe experience where players challenge an intelligent logic designed to thwart the user's victory. It's an engaging battle against an AI that uses strategies to prevent your win in this timeless game.
 
 #### Feel free to explore, contribute, or provide feedback to enhance this project further!
 
