@@ -1,5 +1,5 @@
-import { TitleCasePipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { TitleCasePipe } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -18,7 +18,12 @@ import { IonicModule } from '@ionic/angular';
       {{ label | titlecase }}
     </ion-button>
   `,
-  styleUrl: './button.component.scss',
+  styles: `
+    ion-button {
+      font-size: 12px;
+      margin: 0;
+   }
+  `,
 })
 export class ButtonComponent {
   @Input({ required: true }) label: string;
