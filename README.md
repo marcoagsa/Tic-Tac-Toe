@@ -17,8 +17,11 @@ This project uses angular standalone components
 ![, Game Image](src/assets/git/git1.png)
 
 ![, Game Image](src/assets/git/git2.png)
+
 ![, Game Image](src/assets/git/git3.png)
+
 ![, Game Image](src/assets/git/git4.png)
+
 ![, Game Image](src/assets/git/git5.png)
 ![, Game Image](src/assets/git/git6.png)
 ![, Game Image](src/assets/git/git7.png)
