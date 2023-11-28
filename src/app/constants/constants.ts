@@ -11,6 +11,8 @@ export const POSITIONS_OF_WINS: number[][] = [
   [2, 4, 6],
 ];
 
+export const TIMEOUT: number = 500;
+
 export const MY_ROUTES: Routes = [
   {
     path: 'welcome',

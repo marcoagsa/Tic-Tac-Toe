@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { POSITIONS_OF_WINS } from 'src/app/constants';
+import { POSITIONS_OF_WINS, TIMEOUT } from 'src/app/constants';
 import { HelpService } from 'src/app/services/help.service';
 import { ScorePanel } from 'src/app/interfaces';
 import { BoardComponent, ButtonComponent, ScoreHeaderComponent } from '..';
@@ -196,7 +196,7 @@ export class GameComponent implements OnInit {
 
         this.helperService.hideLoading();
         this.winnerOrDraw ? this.updateWinner() : this.changePlayer();
-      }, 500);
+      }, TIMEOUT);
     }
   }
 
