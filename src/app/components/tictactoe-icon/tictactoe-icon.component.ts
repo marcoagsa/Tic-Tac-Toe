@@ -6,25 +6,25 @@ import { IonicModule } from '@ionic/angular';
   standalone: true,
   imports: [IonicModule],
   template: `@if (value === 1) {
-    <ion-icon
-      mode="ios"
-      slot="icon-only"
-      name="close-outline"
-      color="tic-tac-toe"
-    />
-    } @else if(value === 2) {
-    <ion-icon
-      mode="ios"
-      slot="icon-only"
-      name="ellipse-outline"
-      color="danger"
-    />
-    } @else{
-    <ion-icon mode="ios" slot="icon-only" name="" />
+      <ion-icon
+        mode="ios"
+        slot="icon-only"
+        name="close-outline"
+        color="tic-tac-toe"
+      />
+    } @else if (value === 2) {
+      <ion-icon
+        mode="ios"
+        slot="icon-only"
+        name="ellipse-outline"
+        color="danger"
+      />
+    } @else {
+      <ion-icon mode="ios" slot="icon-only" name="" />
     }`,
   styles: `
     ion-icon {
-      font-size: 100px;
+      font-size: 90px;
     }
   `,
 })

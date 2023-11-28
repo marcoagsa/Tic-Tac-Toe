@@ -8,19 +8,17 @@ import { IonicModule } from '@ionic/angular';
   imports: [IonicModule, TitleCasePipe],
   template: `
     <ion-button
-      class="ion-margin"
       expand="block"
       [color]="color"
       shape="round"
       size="large"
-      mode="ios"
       [disabled]="disabled"
       (click)="triggerClick.emit()"
     >
       {{ label | titlecase }}
     </ion-button>
   `,
-  styles: `ion-button {font-size:14px; margin: 0;}`,
+  styleUrl: './button.component.scss',
 })
 export class ButtonComponent {
   @Input({ required: true }) label: string;

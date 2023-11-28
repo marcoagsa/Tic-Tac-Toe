@@ -46,12 +46,15 @@ import { BoardComponent, ButtonComponent, ScoreHeaderComponent } from '..';
     ion-grid {
       display: grid;
       gap:10px;
+    }
+
+    ion-grid.ios {
       padding-top:10%;
     }
 
     ion-footer {
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-between;
     }
   `,
 })

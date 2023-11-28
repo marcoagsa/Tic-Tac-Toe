@@ -23,9 +23,11 @@ import { TictactoeIconComponent } from '..';
     </ion-card>
   `,
   styles: `
+
     ion-card {
       margin:0;
     }
+
     ion-col {
       display: flex;
       justify-content: center;

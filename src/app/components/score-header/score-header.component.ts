@@ -19,7 +19,6 @@ import { HelpService } from 'src/app/services/help.service';
           <ion-row class="header">
             <ion-col size="2">
               <ion-icon
-                mode="ios"
                 name="person-outline"
                 [color]="iconColor(scorePanel.userIcon)"
                 [ngClass]="{
@@ -43,7 +42,6 @@ import { HelpService } from 'src/app/services/help.service';
             </ion-col>
             <ion-col size="2" class="cpu">
               <ion-icon
-                mode="ios"
                 name="laptop-outline"
                 [color]="iconColor(scorePanel.logicIcon)"
                 [ngClass]="{
@@ -100,20 +98,28 @@ import { HelpService } from 'src/app/services/help.service';
       justify-content: space-between;
     }
 
-    ion-label {
+    ion-label.ios {
       font-size:40px;
     }
 
+    ion-label {
+      font-size:25px;
+    }
+
     .padding-right {
-      padding-right:10px;
+      padding-right: 5px;
     }
 
     .padding-left {
-      padding-left:10px;
+      padding-left: 5px;
+    }
+
+    ion-icon.ios {
+      font-size: 44px;
     }
 
     ion-icon {
-      font-size: 44px;
+      font-size: 30px;
     }
 
   .blink {
