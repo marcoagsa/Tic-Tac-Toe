@@ -12,19 +12,26 @@ This game can run in browser / android / ios
 This project uses Ionic as app development platform and the Ionic CLI.
 This project uses angular standalone components
 
-#
+# Game Images
 
 ![, Game Image](src/assets/git/git1.png)
 ![, Game Image](src/assets/git/git2.png)
-![, Game Image](src/assets/git/git3.png)
-![, Game Image](src/assets/git/git4.png)
-![, Game Image](src/assets/git/git5.png)
-![, Game Image](src/assets/git/git6.png)
 
+<!-- ![, Game Image](src/assets/git/git3.png) -->
+
+![, Game Image](src/assets/git/git4.png)
+
+![, Game Image](src/assets/git/git5.png)
+
+<!-- ![, Game Image](src/assets/git/git6.png) -->
+
+# Game Video
+
+<br/>
 <video width="320" height="240" controls>
   <source src="src/assets/git/tictactoe.mp4" type="video/mp4">
 </video>
-
+<br/>
 # Development Setup 💻
 
 ### Prerequisites
