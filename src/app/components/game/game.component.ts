@@ -27,7 +27,7 @@ import { BoardComponent, ButtonComponent, ScoreHeaderComponent } from '..';
       <app-button
         [label]="stopGame"
         [color]="'danger'"
-        (triggerClick)="goHome()"
+        (triggerClick)="navigateTo()"
       />
       <app-button
         [label]="selectIcon"
@@ -121,7 +121,7 @@ export class GameComponent implements OnInit {
     this.scorePanel().logicIcon = data === 2 ? 1 : 2;
   }
 
-  goHome() {
+  navigateTo() {
     this.initGame();
     this.routerCtrl.navigateByUrl('/welcome');
   }
@@ -129,7 +129,15 @@ export class GameComponent implements OnInit {
   initGame() {
     this.boardGamePositions = Array(9).fill(null);
     this.scorePanel().winner = null;
-    this.scorePanel().userIsNext = true;
+    this.whoStarts();
+  }
+
+  whoStarts() {
+    this.scorePanel().userIsNext = !this.scorePanel().userIsNext;
+
+    if (!this.scorePanel().userIsNext) {
+      this.logicMove();
+    }
   }
 
   updateWinner(): void {
