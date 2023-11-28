@@ -175,20 +175,21 @@ export class GameComponent implements OnInit {
   logicMove() {
     if (this.winnerOrDraw) {
       this.updateWinner();
-    }
-    this.helperService.showLoading();
-    let logicPosition = this.avoidUserVictory();
-    setTimeout(() => {
-      if (!this.boardGamePositions[logicPosition]) {
-        this.addPosition(logicPosition);
-      } else {
-        logicPosition = this.findAvailablePosition();
-        this.addPosition(logicPosition);
-      }
+    } else {
+      this.helperService.showLoading();
+      let logicPosition = this.avoidUserVictory();
+      setTimeout(() => {
+        if (!this.boardGamePositions[logicPosition]) {
+          this.addPosition(logicPosition);
+        } else {
+          logicPosition = this.findAvailablePosition();
+          this.addPosition(logicPosition);
+        }
 
-      this.helperService.hideLoading();
-      this.winnerOrDraw ? this.updateWinner() : this.changePlayer();
-    }, 500);
+        this.helperService.hideLoading();
+        this.winnerOrDraw ? this.updateWinner() : this.changePlayer();
+      }, 500);
+    }
   }
 
   addPosition(position: number) {
