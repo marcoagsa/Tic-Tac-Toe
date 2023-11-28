@@ -30,8 +30,9 @@
 }
 
 .custom-alert .alert-message {
-  padding-top: 16px;
+  padding-top: 16px !important;
   font-size: 15px;
+  text-align: center;
 
   ion-text {
     font-size: 40px;
