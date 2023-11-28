@@ -28,15 +28,7 @@ This project uses angular standalone components
 
 # Game Video
 
-<br/>
-<video width="320" height="240" controls>
-  <source src="src/assets/git/tictactoe.mp4" type="video/mp4">
-</video>
-<br/>
-
-
 https://github.com/marcoagsa/Tic-Tac-Toe/assets/14275804/1fc9f00b-19d8-4d40-a455-eecfdfcd3c0f
-
 
 # Development Setup 💻
 
