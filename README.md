@@ -14,12 +14,13 @@ This project uses angular standalone components
 
 # Game Images
 
-![, Game Image](src/assets/git/git1.png)
+<!-- ![, Game Image](src/assets/git/git1.png) -->
+
 ![, Game Image](src/assets/git/git2.png)
 
 <!-- ![, Game Image](src/assets/git/git3.png) -->
 
-![, Game Image](src/assets/git/git4.png)
+<!-- ![, Game Image](src/assets/git/git4.png) -->
 
 ![, Game Image](src/assets/git/git5.png)
 
@@ -32,6 +33,7 @@ This project uses angular standalone components
   <source src="src/assets/git/tictactoe.mp4" type="video/mp4">
 </video>
 <br/>
+
 # Development Setup 💻
 
 ### Prerequisites
