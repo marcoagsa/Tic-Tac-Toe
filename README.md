@@ -21,7 +21,9 @@ This project uses angular standalone components
 ![, Game Image](src/assets/git/git5.png)
 ![, Game Image](src/assets/git/git6.png)
 
-![, Game Video](src/assets/git/tictactoe.mp4)
+<video width="320" height="240" controls>
+  <source src="src/assets/git/tictactoe.mp4" type="video/mp4">
+</video>
 
 # Development Setup 💻
 
