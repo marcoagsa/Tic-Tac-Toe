@@ -55,6 +55,7 @@ import { BoardComponent, ButtonComponent, ScoreHeaderComponent } from '..';
     ion-footer {
       display: flex;
       justify-content: space-between;
+      padding-bottom: 50px;
     }
   `,
 })

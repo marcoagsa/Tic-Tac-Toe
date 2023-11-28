@@ -1,8 +1,8 @@
-import { NgClass, TitleCasePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { NgClass, TitleCasePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { ButtonComponent } from '../button/button.component';
+import { ButtonComponent } from '..';
 
 @Component({
   selector: 'app-welcome',
@@ -21,7 +21,7 @@ import { ButtonComponent } from '../button/button.component';
     </ion-footer>
   `,
   styles: `
-    .title {
+    ion-label.title {
       display: flex;
       font-size: 10vh;
       font-family: monospace;
@@ -29,20 +29,26 @@ import { ButtonComponent } from '../button/button.component';
       justify-content: center;
       margin-top: 10%;
     }
+
     ion-card {
       background: var(--ion-background-color);
     }
+
     ion-img {
       display: flex;
       margin: 0 auto;
     }
+
+    ion-footer {
+      padding-bottom: 50px;
+    }
+
   `,
 })
 export class WelcomeComponent {
-  pageTitle: string = 'Tic-tac-toe';
-  gameLogo: string = '/assets/tictactoe.png';
-  buttonLabel = 'start';
-
+  readonly pageTitle: string = 'Tic-tac-toe';
+  readonly gameLogo: string = '/assets/tictactoe.png';
+  readonly buttonLabel = 'start';
   readonly routerCtrl = inject(Router);
 
   init() {
