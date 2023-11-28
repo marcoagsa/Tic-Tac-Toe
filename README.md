@@ -14,7 +14,14 @@ This project uses angular standalone components
 
 # Game Images
 
-![, Game Image](src/assets/git/git1.png)
+![,Game Image](src/assets/git/git1.PNG)
+![,Game Image](src/assets/git/git2.PNG)
+![,Game Image](src/assets/git/git3.PNG)
+![,Game Image](src/assets/git/git4.PNG)
+![,Game Image](src/assets/git/git5.PNG)
+![,Game Image](src/assets/git/git6.PNG)
+![,Game Image](src/assets/git/git7.PNG)
+![,Game Image](src/assets/git/git8.PNG)
 
 
 
