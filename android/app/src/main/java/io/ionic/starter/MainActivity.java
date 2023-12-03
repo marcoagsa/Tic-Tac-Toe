@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.msa.tic-tac-toe;
 
 import com.getcapacitor.BridgeActivity;
 

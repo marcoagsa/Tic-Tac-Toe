@@ -1,5 +1,5 @@
 {
-	"appId": "io.ionic.starter",
+	"appId": "com.msa.tic-tac-toe",
 	"appName": "Tic-Tac-Toe",
 	"webDir": "www"
 }
