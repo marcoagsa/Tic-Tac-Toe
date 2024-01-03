@@ -23,10 +23,16 @@ import { ButtonComponent } from '../button/button.component';
     <ion-content [fullscreen]="true" class="ion-padding" scrollY="false">
       <ion-grid fixed>
         <app-score-header [scorePanel]="scorePanel()" [player]="player" />
-        @if (this.boardGamePositions) {
+        @if (!disableBoard) {
           <app-board
             [disabled]="disableBoard"
-            [boardGamePositions]="boardGamePositions"
+            [boardGamePositions]="boardGamePositions()"
+            (triggerClick)="userMove($event)"
+          />
+        } @else {
+          <app-board
+            [disabled]="disableBoard"
+            [boardGamePositions]="boardGamePositions()"
             (triggerClick)="userMove($event)"
           />
         }
@@ -69,14 +75,14 @@ import { ButtonComponent } from '../button/button.component';
   `,
 })
 export class GameComponent implements OnInit {
+  private helperService = inject(HelpService);
+  private routerCtrl = inject(Router);
   readonly startGame: string = 'New Game';
   readonly selectIcon: string = 'Change Icon';
   readonly stopGame: string = 'Stop Game';
   readonly positionsOfWins = POSITIONS_OF_WINS;
-  private helperService = inject(HelpService);
-  private routerCtrl = inject(Router);
+  public boardGamePositions = signal<number[]>(new Array(9).fill(null));
 
-  public boardGamePositions: number[];
   public scorePanel = signal<ScorePanel>({
     userIcon: null,
     logicIcon: null,
@@ -105,7 +111,7 @@ export class GameComponent implements OnInit {
 
   get isDraw(): boolean {
     return (
-      this.boardGamePositions?.filter((el) => el === null)?.length === 0 &&
+      this.boardGamePositions()?.filter((el) => el === null)?.length === 0 &&
       !this.scorePanel().winner
     );
   }
@@ -135,8 +141,8 @@ export class GameComponent implements OnInit {
     this.routerCtrl.navigateByUrl('/welcome');
   }
 
-  initGame() {
-    this.boardGamePositions = Array(9).fill(null);
+  async initGame() {
+    this.boardGamePositions.update((items) => items.fill(null));
     this.scorePanel().winner = null;
     this.whoStarts();
   }
@@ -180,6 +186,10 @@ export class GameComponent implements OnInit {
   }
 
   userMove(position: number) {
+    if (this.boardGamePositions()[position]) {
+      return;
+    }
+
     this.addPosition(position);
     if (this.winnerOrDraw) {
       this.updateWinner();
@@ -189,37 +199,37 @@ export class GameComponent implements OnInit {
     }
   }
 
-  logicMove() {
+  async logicMove() {
     if (this.winnerOrDraw) {
       this.updateWinner();
     } else {
-      this.helperService.showLoading();
+      await this.helperService.showLoading();
       let logicPosition = this.avoidUserVictory();
-      setTimeout(() => {
-        if (!this.boardGamePositions[logicPosition]) {
+      setTimeout(async () => {
+        if (!this.boardGamePositions()[logicPosition]) {
           this.addPosition(logicPosition);
         } else {
           logicPosition = this.findAvailablePosition();
           this.addPosition(logicPosition);
         }
 
-        this.helperService.hideLoading();
+        await this.helperService.hideLoading();
         this.winnerOrDraw ? this.updateWinner() : this.changePlayer();
       }, TIMEOUT);
     }
   }
 
   addPosition(position: number) {
-    this.boardGamePositions.splice(position, 1, this.player);
+    this.boardGamePositions().splice(position, 1, this.player);
   }
 
   avoidUserVictory(): number {
     for (const position of this.positionsOfWins) {
       const [pos1, pos2, pos3] = position;
 
-      const p1 = this.boardGamePositions[pos1];
-      const p2 = this.boardGamePositions[pos2];
-      const p3 = this.boardGamePositions[pos3];
+      const p1 = this.boardGamePositions()[pos1];
+      const p2 = this.boardGamePositions()[pos2];
+      const p3 = this.boardGamePositions()[pos3];
 
       if (p1 && p1 === p2 && !p3) {
         return pos3;
@@ -236,12 +246,12 @@ export class GameComponent implements OnInit {
   }
 
   findAvailablePosition(): number {
-    return this.boardGamePositions.findIndex((el) => el === null);
+    return this.boardGamePositions().findIndex((el) => el === null);
   }
 
   logicRadomMove(): number {
     let pos: number[] = [];
-    for (const [index, value] of this.boardGamePositions.entries()) {
+    for (const [index, value] of this.boardGamePositions().entries()) {
       if (value === null) {
         pos.push(index);
       }
@@ -254,11 +264,11 @@ export class GameComponent implements OnInit {
     for (const [index, value] of this.positionsOfWins.entries()) {
       const [a, b, c] = this.positionsOfWins[index];
       if (
-        this.boardGamePositions[a] &&
-        this.boardGamePositions[a] === this.boardGamePositions[b] &&
-        this.boardGamePositions[a] === this.boardGamePositions[c]
+        this.boardGamePositions()[a] &&
+        this.boardGamePositions()[a] === this.boardGamePositions()[b] &&
+        this.boardGamePositions()[a] === this.boardGamePositions()[c]
       ) {
-        return this.boardGamePositions[a];
+        return this.boardGamePositions()[a];
       }
     }
     return null;
