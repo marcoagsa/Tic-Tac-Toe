@@ -73,8 +73,8 @@ export class GameComponent implements OnInit {
   readonly selectIcon: string = 'Change Icon';
   readonly stopGame: string = 'Stop Game';
   readonly positionsOfWins = POSITIONS_OF_WINS;
-  readonly helperService = inject(HelpService);
-  readonly routerCtrl = inject(Router);
+  private helperService = inject(HelpService);
+  private routerCtrl = inject(Router);
 
   public boardGamePositions: number[];
   public scorePanel = signal<ScorePanel>({
