@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.msa.tic-tac-toe',
+  appId: 'com.msa.ticTacToe',
   appName: 'Tic-Tac-Toe',
   webDir: 'www/browser',
 };
