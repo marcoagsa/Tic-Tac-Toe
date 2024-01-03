@@ -1,13 +1,41 @@
 import { NgClass, TitleCasePipe } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonCol,
+  IonGrid,
+  IonIcon,
+  IonLabel,
+  IonRow,
+  IonText,
+} from '@ionic/angular/standalone';
 import { ScorePanel } from 'src/app/interfaces';
 import { HelpService } from 'src/app/services/help.service';
+import { addIcons } from 'ionicons';
+import { laptopOutline, personOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-score-header',
   standalone: true,
-  imports: [IonicModule, TitleCasePipe, NgClass],
+  imports: [
+    IonCard,
+    IonCardHeader,
+    IonCardSubtitle,
+    IonCardTitle,
+    IonCardContent,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonIcon,
+    IonText,
+    IonLabel,
+    TitleCasePipe,
+    NgClass,
+  ],
   template: `
     <ion-card>
       <ion-card-header>
@@ -146,6 +174,10 @@ export class ScoreHeaderComponent {
   readonly subTitle: string = 'Game Score';
   readonly nextPlayerLabel: string = 'Next Player';
   readonly helpService = inject(HelpService);
+
+  constructor() {
+    addIcons({ laptopOutline, personOutline });
+  }
 
   iconColor(num: number) {
     return {

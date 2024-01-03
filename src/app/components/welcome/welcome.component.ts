@@ -1,13 +1,26 @@
 import { Component, inject } from '@angular/core';
 import { NgClass, TitleCasePipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
-import { ButtonComponent } from '..';
+import {
+  IonContent,
+  IonFooter,
+  IonImg,
+  IonLabel,
+} from '@ionic/angular/standalone';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-welcome',
   standalone: true,
-  imports: [IonicModule, NgClass, TitleCasePipe, ButtonComponent],
+  imports: [
+    IonContent,
+    IonLabel,
+    IonImg,
+    IonFooter,
+    NgClass,
+    TitleCasePipe,
+    ButtonComponent,
+  ],
   template: `
     <ion-content [fullscreen]="true" scrollY="false" class="ion-padding">
       <ion-label mode="ios" class="title" color="tic-tac-toe">

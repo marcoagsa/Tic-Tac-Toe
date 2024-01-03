@@ -3,8 +3,8 @@ import {
   AlertController,
   LoadingController,
   ModalController,
-} from '@ionic/angular';
-import { SelectTictactoeIconComponent } from '../modal';
+} from '@ionic/angular/standalone';
+import { SelectTicTacToeIconComponent } from '../modal';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class HelpService {
 
   async openModal() {
     const modal = await this.modalController.create({
-      component: SelectTictactoeIconComponent,
+      component: SelectTicTacToeIconComponent,
       backdropDismiss: false,
       showBackdrop: true,
       keyboardClose: true,

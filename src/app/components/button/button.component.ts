@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonButton } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [IonicModule, TitleCasePipe],
+  imports: [IonButton, TitleCasePipe],
   template: `
     <ion-button
       expand="block"

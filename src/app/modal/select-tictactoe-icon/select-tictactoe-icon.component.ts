@@ -1,10 +1,31 @@
 import { Component, inject } from '@angular/core';
-import { IonicModule, ModalController } from '@ionic/angular';
+import {
+  IonButton,
+  IonCol,
+  IonContent,
+  IonHeader,
+  IonRow,
+  IonTitle,
+  IonToolbar,
+  IonIcon,
+  ModalController,
+} from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { closeOutline, ellipseOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-select-tictactoe-icon',
   standalone: true,
-  imports: [IonicModule],
+  imports: [
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonRow,
+    IonCol,
+    IonButton,
+    IonIcon,
+  ],
   template: `
     <ion-header mode="ios">
       <ion-toolbar mode="ios" class="ion-no-padding">
@@ -60,8 +81,12 @@ import { IonicModule, ModalController } from '@ionic/angular';
     }
     `,
 })
-export class SelectTictactoeIconComponent {
+export class SelectTicTacToeIconComponent {
   readonly modalCrt = inject(ModalController);
+
+  constructor() {
+    addIcons({ closeOutline, ellipseOutline });
+  }
   selectUserIcon(num: number): void {
     this.modalCrt.dismiss(num);
   }

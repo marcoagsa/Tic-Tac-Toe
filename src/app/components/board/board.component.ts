@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { TictactoeIconComponent } from '..';
+import { IonCard, IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
+import { TicTacToeIconComponent } from '../tictactoe-icon/tictactoe-icon.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [IonicModule, TictactoeIconComponent],
+  imports: [IonCard, IonGrid, IonRow, IonCol, TicTacToeIconComponent],
   template: `
     <ion-card [disabled]="disabled" mode="ios">
       <ion-grid mode="ios">

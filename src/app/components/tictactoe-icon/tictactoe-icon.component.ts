@@ -1,10 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonIcon } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { closeOutline, ellipseOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-tictactoe-icon',
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonIcon],
   template: `@if (value === 1) {
       <ion-icon
         mode="ios"
@@ -28,6 +30,9 @@ import { IonicModule } from '@ionic/angular';
     }
   `,
 })
-export class TictactoeIconComponent {
+export class TicTacToeIconComponent {
   @Input({ required: true }) value: number;
+  constructor() {
+    addIcons({ closeOutline, ellipseOutline });
+  }
 }

@@ -1,15 +1,24 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { IonContent, IonFooter, IonGrid } from '@ionic/angular/standalone';
 import { POSITIONS_OF_WINS, TIMEOUT } from 'src/app/constants';
 import { HelpService } from 'src/app/services/help.service';
 import { ScorePanel } from 'src/app/interfaces';
-import { BoardComponent, ButtonComponent, ScoreHeaderComponent } from '..';
+import { ScoreHeaderComponent } from '../score-header/score-header.component';
+import { BoardComponent } from '../board/board.component';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [IonicModule, ScoreHeaderComponent, BoardComponent, ButtonComponent],
+  imports: [
+    IonContent,
+    IonGrid,
+    IonFooter,
+    ScoreHeaderComponent,
+    BoardComponent,
+    ButtonComponent,
+  ],
   template: `
     <ion-content [fullscreen]="true" class="ion-padding" scrollY="false">
       <ion-grid fixed>
