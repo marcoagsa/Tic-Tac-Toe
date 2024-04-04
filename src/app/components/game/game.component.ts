@@ -60,11 +60,11 @@ import { ButtonComponent } from '../button/button.component';
   styles: `
     ion-grid {
       display: grid;
-      gap:10px;
+      gap: 10px;
     }
 
     ion-grid.ios {
-      padding-top:10%;
+      padding-top: 10%;
     }
 
     ion-footer {
@@ -102,7 +102,7 @@ export class GameComponent implements OnInit {
   }
 
   get disableBoard() {
-    return !!this.scorePanel().winner ?? this.isDraw;
+    return !!this.scorePanel().winner || this.isDraw;
   }
 
   get userWin() {
