@@ -19,7 +19,6 @@ npm-debug.log*
 
 /.nx
 /.angular
-/.yarn
 /.idea
 /.ionic
 /.sass-cache
@@ -32,3 +31,14 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+
+
+# Yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
