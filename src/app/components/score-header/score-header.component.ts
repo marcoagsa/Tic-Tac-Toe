@@ -1,5 +1,5 @@
 import { NgClass, TitleCasePipe } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import {
   IonCard,
   IonCardContent,
@@ -18,29 +18,31 @@ import { HelpService } from 'src/app/services/help.service';
 import { addIcons } from 'ionicons';
 import { laptopOutline, personOutline } from 'ionicons/icons';
 
+const imports = [
+  IonCard,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonCardContent,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonIcon,
+  IonText,
+  IonLabel,
+  TitleCasePipe,
+  NgClass,
+];
+
 @Component({
   selector: 'app-score-header',
   standalone: true,
-  imports: [
-    IonCard,
-    IonCardHeader,
-    IonCardSubtitle,
-    IonCardTitle,
-    IonCardContent,
-    IonGrid,
-    IonRow,
-    IonCol,
-    IonIcon,
-    IonText,
-    IonLabel,
-    TitleCasePipe,
-    NgClass,
-  ],
+  imports,
   template: `
     <ion-card>
       <ion-card-header>
-        <ion-card-subtitle>{{ subTitle }}</ion-card-subtitle>
-        <ion-card-title>{{ title }}</ion-card-title>
+        <ion-card-subtitle> {{ subTitle }} </ion-card-subtitle>
+        <ion-card-title> {{ title }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <ion-grid>
@@ -48,22 +50,24 @@ import { laptopOutline, personOutline } from 'ionicons/icons';
             <ion-col size="2">
               <ion-icon
                 name="person-outline"
-                [color]="iconColor(scorePanel.userIcon)"
+                [color]="iconColor(scorePanel().userIcon)"
                 [ngClass]="{
-                  blink: scorePanel.userIsNext && scorePanel.userIcon
+                  blink: scorePanel().userIsNext && scorePanel().userIcon
                 }"
               />
             </ion-col>
             <ion-col size="8" class="center">
-              @if (scorePanel.userIcon !== null && scorePanel.winner === null) {
+              @if (
+                scorePanel().userIcon !== null && scorePanel().winner === null
+              ) {
                 <ion-text>
                   {{ nextPlayerLabel | titlecase }}
                 </ion-text>
-                <ion-label [color]="iconColor(player)" class="blink">
+                <ion-label [color]="iconColor(player())" class="blink">
                   {{
-                    scorePanel.userIsNext
-                      ? helpService.checkIcon(scorePanel.userIcon)
-                      : helpService.checkIcon(scorePanel.logicIcon)
+                    scorePanel().userIsNext
+                      ? helpService.checkIcon(scorePanel().userIcon)
+                      : helpService.checkIcon(scorePanel().logicIcon)
                   }}
                 </ion-label>
               }
@@ -71,9 +75,9 @@ import { laptopOutline, personOutline } from 'ionicons/icons';
             <ion-col size="2" class="cpu">
               <ion-icon
                 name="laptop-outline"
-                [color]="iconColor(scorePanel.logicIcon)"
+                [color]="iconColor(scorePanel().logicIcon)"
                 [ngClass]="{
-                  blink: !scorePanel.userIsNext && scorePanel.userIcon
+                  blink: !scorePanel().userIsNext && scorePanel().userIcon
                 }"
               />
             </ion-col>
@@ -81,10 +85,10 @@ import { laptopOutline, personOutline } from 'ionicons/icons';
 
           <ion-row class="wins">
             <ion-label class="padding-left">
-              {{ scorePanel.userWins ?? 0 }}
+              {{ scorePanel().userWins ?? 0 }}
             </ion-label>
             <ion-label class="padding-right">
-              {{ scorePanel.logicWins ?? 0 }}
+              {{ scorePanel().logicWins ?? 0 }}
             </ion-label>
           </ion-row>
         </ion-grid>
@@ -92,22 +96,21 @@ import { laptopOutline, personOutline } from 'ionicons/icons';
     </ion-card>
   `,
   styles: `
-
     ion-card {
-      margin:0;
+      margin: 0;
     }
 
     ion-grid {
-      display:grid;
-      gap:10px
+      display: grid;
+      gap: 10px;
     }
 
     ion-row.header {
-      height: 50px
+      height: 50px;
     }
 
     ion-col {
-      padding:0px;
+      padding: 0px;
     }
 
     ion-col.center {
@@ -127,11 +130,11 @@ import { laptopOutline, personOutline } from 'ionicons/icons';
     }
 
     ion-label.ios {
-      font-size:40px;
+      font-size: 40px;
     }
 
     ion-label {
-      font-size:25px;
+      font-size: 25px;
     }
 
     .padding-right {
@@ -150,7 +153,7 @@ import { laptopOutline, personOutline } from 'ionicons/icons';
       font-size: 30px;
     }
 
-  .blink {
+    .blink {
       animation: blink 2s steps(5, start) infinite;
       -webkit-animation: blink 1s steps(5, start) infinite;
     }
@@ -167,8 +170,8 @@ import { laptopOutline, personOutline } from 'ionicons/icons';
   `,
 })
 export class ScoreHeaderComponent {
-  @Input({ required: true }) scorePanel: ScorePanel;
-  @Input({ required: true }) player: number;
+  scorePanel = input.required<ScorePanel>();
+  player = input.required<number>();
 
   readonly title: string = 'Tic Tac Toe';
   readonly subTitle: string = 'Game Score';

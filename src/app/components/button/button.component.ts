@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
 import { IonButton } from '@ionic/angular/standalone';
 
@@ -9,25 +9,25 @@ import { IonButton } from '@ionic/angular/standalone';
   template: `
     <ion-button
       expand="block"
-      [color]="color"
+      [color]="color()"
       shape="round"
       size="large"
-      [disabled]="disabled"
+      [disabled]="disabled()"
       (click)="triggerClick.emit()"
     >
-      {{ label | titlecase }}
+      {{ label() | titlecase }}
     </ion-button>
   `,
   styles: `
     ion-button {
       font-size: 12px;
       margin: 0;
-   }
+    }
   `,
 })
 export class ButtonComponent {
-  @Input({ required: true }) label: string;
-  @Input() disabled: boolean | undefined;
-  @Input() color: string = 'tic-tac-toe';
-  @Output() triggerClick = new EventEmitter();
+  label = input.required<string>();
+  color = input<string>('tic-tac-toe');
+  disabled = input<boolean | undefined>(undefined);
+  triggerClick = output();
 }

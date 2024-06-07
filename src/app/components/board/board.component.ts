@@ -1,16 +1,18 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { IonCard, IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
 import { TicTacToeIconComponent } from '../tictactoe-icon/tictactoe-icon.component';
+
+const imports = [IonCard, IonGrid, IonRow, IonCol, TicTacToeIconComponent];
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [IonCard, IonGrid, IonRow, IonCol, TicTacToeIconComponent],
+  imports,
   template: `
-    <ion-card [disabled]="disabled" mode="ios">
+    <ion-card [disabled]="disabled()" mode="ios">
       <ion-grid mode="ios">
         <ion-row mode="ios">
-          @for (val of boardGamePositions; track val; let i = $index) {
+          @for (val of boardGamePositions(); track val; let i = $index) {
             <ion-col mode="ios" size="4" class="border">
               <app-tictactoe-icon
                 [value]="val"
@@ -23,9 +25,8 @@ import { TicTacToeIconComponent } from '../tictactoe-icon/tictactoe-icon.compone
     </ion-card>
   `,
   styles: `
-
     ion-card {
-      margin:0;
+      margin: 0;
     }
 
     ion-col {
@@ -46,10 +47,10 @@ import { TicTacToeIconComponent } from '../tictactoe-icon/tictactoe-icon.compone
     ion-col.border {
       border: solid 1px #9d9fa6;
     }
-`,
+  `,
 })
 export class BoardComponent {
-  @Input({ required: true }) disabled: boolean;
-  @Input({ required: true }) boardGamePositions: number[];
-  @Output() triggerClick = new EventEmitter<number>();
+  disabled = input.required<boolean>();
+  boardGamePositions = input.required<number[]>();
+  triggerClick = output<number>();
 }

@@ -9,18 +9,20 @@ import {
 } from '@ionic/angular/standalone';
 import { ButtonComponent } from '../button/button.component';
 
+const imports = [
+  IonContent,
+  IonLabel,
+  IonImg,
+  IonFooter,
+  NgClass,
+  TitleCasePipe,
+  ButtonComponent,
+];
+
 @Component({
   selector: 'app-welcome',
   standalone: true,
-  imports: [
-    IonContent,
-    IonLabel,
-    IonImg,
-    IonFooter,
-    NgClass,
-    TitleCasePipe,
-    ButtonComponent,
-  ],
+  imports,
   template: `
     <ion-content [fullscreen]="true" scrollY="false" class="ion-padding">
       <ion-label mode="ios" class="title" color="tic-tac-toe">
@@ -55,7 +57,6 @@ import { ButtonComponent } from '../button/button.component';
     ion-footer {
       padding-bottom: 50px;
     }
-
   `,
 })
 export class WelcomeComponent {

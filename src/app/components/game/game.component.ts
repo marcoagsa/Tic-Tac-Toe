@@ -8,17 +8,19 @@ import { ScoreHeaderComponent } from '../score-header/score-header.component';
 import { BoardComponent } from '../board/board.component';
 import { ButtonComponent } from '../button/button.component';
 
+const imports = [
+  IonContent,
+  IonGrid,
+  IonFooter,
+  ScoreHeaderComponent,
+  BoardComponent,
+  ButtonComponent,
+];
+
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [
-    IonContent,
-    IonGrid,
-    IonFooter,
-    ScoreHeaderComponent,
-    BoardComponent,
-    ButtonComponent,
-  ],
+  imports,
   template: `
     <ion-content [fullscreen]="true" class="ion-padding" scrollY="false">
       <ion-grid fixed>
@@ -75,13 +77,14 @@ import { ButtonComponent } from '../button/button.component';
   `,
 })
 export class GameComponent implements OnInit {
-  private helperService = inject(HelpService);
-  private routerCtrl = inject(Router);
   readonly startGame: string = 'New Game';
   readonly selectIcon: string = 'Change Icon';
   readonly stopGame: string = 'Stop Game';
   readonly positionsOfWins = POSITIONS_OF_WINS;
   public boardGamePositions = signal<number[]>(new Array(9).fill(null));
+
+  private helperService = inject(HelpService);
+  private routerCtrl = inject(Router);
 
   public scorePanel = signal<ScorePanel>({
     userIcon: null,
@@ -109,7 +112,7 @@ export class GameComponent implements OnInit {
     return this.scorePanel().winner === this.scorePanel().userIcon;
   }
 
-  get isDraw(): boolean {
+  get isDraw() {
     return (
       this.boardGamePositions()?.filter((el) => el === null)?.length === 0 &&
       !this.scorePanel().winner
@@ -126,7 +129,7 @@ export class GameComponent implements OnInit {
     this.initGame();
   }
 
-  async iconPick(): Promise<any> {
+  async iconPick() {
     const { data } = await this.helperService.openModal();
 
     if (!data) {

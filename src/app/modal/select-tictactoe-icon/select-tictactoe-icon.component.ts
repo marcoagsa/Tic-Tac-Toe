@@ -13,25 +13,27 @@ import {
 import { addIcons } from 'ionicons';
 import { closeOutline, ellipseOutline } from 'ionicons/icons';
 
+const imports = [
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonRow,
+  IonCol,
+  IonButton,
+  IonIcon,
+];
+
 @Component({
   selector: 'app-select-tictactoe-icon',
   standalone: true,
-  imports: [
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonRow,
-    IonCol,
-    IonButton,
-    IonIcon,
-  ],
+  imports,
   template: `
     <ion-header mode="ios">
       <ion-toolbar mode="ios" class="ion-no-padding">
-        <ion-title mode="ios" class="ion-no-padding" color="tic-tac-toe"
-          >Select your Icon !</ion-title
-        >
+        <ion-title mode="ios" class="ion-no-padding" color="tic-tac-toe">
+          Select your Icon !
+        </ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
@@ -63,7 +65,7 @@ import { closeOutline, ellipseOutline } from 'ionicons/icons';
   `,
   styles: `
     ion-col {
-      padding:0;
+      padding: 0;
       padding: 2vh 3vh 2vh 3vh;
     }
 
@@ -76,10 +78,10 @@ import { closeOutline, ellipseOutline } from 'ionicons/icons';
     }
 
     ion-button {
-      margin:0;
+      margin: 0;
       padding: 2vh;
     }
-    `,
+  `,
 })
 export class SelectTicTacToeIconComponent {
   readonly modalCrt = inject(ModalController);
