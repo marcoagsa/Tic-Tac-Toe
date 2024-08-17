@@ -12,11 +12,11 @@ const imports = [IonCard, IonGrid, IonRow, IonCol, TicTacToeIconComponent];
     <ion-card [disabled]="disabled()" mode="ios">
       <ion-grid mode="ios">
         <ion-row mode="ios">
-          @for (val of boardGamePositions(); track val; let i = $index) {
+          @for (val of boardGamePositions(); track $index) {
             <ion-col mode="ios" size="4" class="border">
               <app-tictactoe-icon
                 [value]="val"
-                (click)="triggerClick.emit(i)"
+                (click)="triggerClick.emit($index)"
               />
             </ion-col>
           }
