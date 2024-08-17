@@ -75,5 +75,6 @@
     "last 2 iOS major versions",
     "Firefox ESR",
     "not IE 11 "
-  ]
+  ],
+  "packageManager": "yarn@4.4.0"
 }
