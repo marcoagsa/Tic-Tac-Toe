@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { NgClass, TitleCasePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import {
   IonContent,
@@ -9,15 +8,7 @@ import {
 } from '@ionic/angular/standalone';
 import { ButtonComponent } from '../button/button.component';
 
-const imports = [
-  IonContent,
-  IonLabel,
-  IonImg,
-  IonFooter,
-  NgClass,
-  TitleCasePipe,
-  ButtonComponent,
-];
+const imports = [IonContent, IonLabel, IonImg, IonFooter, ButtonComponent];
 
 @Component({
   selector: 'app-welcome',
