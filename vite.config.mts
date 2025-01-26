@@ -13,9 +13,9 @@ export default defineConfig(({ mode }) => {
       // environment: "jsdom",
       browser: {
         enabled: true,
-        name: "chromium",
+        // name: "chrome",
         headless: false, // set to true in CI
-        provider: "playwright",
+        provider: "wsEndpoint",
       },
       setupFiles: ["src/test-setup.ts"],
       include: ["**/*.spec.ts"],
