@@ -13,19 +13,6 @@ if (environment.production) {
   enableProdMode();
 }
 
-// bootstrapApplication(AppComponent, {
-//   providers: [
-//     importProvidersFrom(
-//       RouterModule.forRoot(MY_ROUTES, {
-//         preloadingStrategy: PreloadAllModules,
-//       }),
-//       IonicModule.forRoot({ innerHTMLTemplatesEnabled: true }),
-//     ),
-//     BrowserModule,
-//     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-//   ],
-// }).catch((err) => console.error(err));
-
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
